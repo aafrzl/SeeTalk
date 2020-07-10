@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.akb.seetalk.SendCommentActivity"></activity>
+        <activity android:name="com.akb.seetalk.SendCommentActivity" />
         <activity android:name="com.akb.seetalk.PostActivity" />
         <activity android:name="com.akb.seetalk.ViewProfileActivity" />
         <activity android:name="com.akb.seetalk.LoginActivity">

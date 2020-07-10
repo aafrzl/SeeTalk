@@ -15,7 +15,7 @@ Coming soon :
 Work it :
 - Hapus StartActivity ganti menjadi Splash screen
 - Request Kontak untuk ke chatlist atau follow ke chatlist
-- fungsi like, comment & save post
+- save post
 - Post details
 - Notification post
 - Loading Post

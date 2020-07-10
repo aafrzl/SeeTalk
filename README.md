@@ -13,8 +13,7 @@ Coming soon :
 - Splash Screen
 
 Work it :
-- Hapus StartActivity ganti menjadi Splash screen
-- Request Kontak untuk ke chatlist atau follow ke chatlist
+- Ketika follow user ke chatlist
 - save post
 - Post details
 - Notification post

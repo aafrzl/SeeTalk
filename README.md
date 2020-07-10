@@ -44,3 +44,4 @@ update baru :
 - Delete message
 - Post Feed dah muncul
 - Main Menu profile image set onclick
+- Komen dah bisa

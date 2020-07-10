@@ -13,32 +13,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.akb.seetalk.SendCommentActivity" />
-        <activity android:name="com.akb.seetalk.PostActivity" />
-        <activity android:name="com.akb.seetalk.ViewProfileActivity" />
-        <activity android:name="com.akb.seetalk.LoginActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SendCommentActivity" />
+        <activity android:name=".PostActivity" />
+        <activity android:name=".ViewProfileActivity" />
+        <activity android:name=".LoginActivity">
+        </activity>
         <activity
-            android:name="com.akb.seetalk.ProfileActivity"
-            android:parentActivityName="com.akb.seetalk.MainActivity"
+            android:name=".ProfileActivity"
+            android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name="com.akb.seetalk.MessageActivity" />
+        <activity android:name=".MessageActivity" />
         <activity
-            android:name="com.akb.seetalk.CariTemanActivity"
-            android:parentActivityName="com.akb.seetalk.MainActivity"
+            android:name=".CariTemanActivity"
+            android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name="com.akb.seetalk.MainActivity" />
+        <activity android:name=".MainActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
 
         <service
-            android:name="com.akb.seetalk.Notifications.MyFirebaseMessaging"
+            android:name=".Notifications.MyFirebaseMessaging"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

@@ -5,35 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/white">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
 
-        <TextView
+
+        <ImageView
+            android:id="@+id/logo"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mari Bercakap"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="#fff"/>
-        <TextView
-            android:textColor="#fff"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Beta Version"
-            android:textSize="15sp"
-            android:textStyle="italic"
-            android:layout_marginBottom="250dp"/>
+            android:layout_height="200dp"
+            android:layout_marginTop="125dp"
+            android:src="@drawable/logo"
+            />
 
-    </LinearLayout>
+
 
     <TextView
         android:textStyle="italic"
-        android:textColor="#fff"
+        android:textColor="@color/black"
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

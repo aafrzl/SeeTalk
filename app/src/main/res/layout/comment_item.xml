@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/image_profile"
+        android:src="@drawable/profile_img"/>
+
+    <LinearLayout
+        android:id="@+id/layoutLinear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:orientation="horizontal"
+        android:layout_toEndOf="@id/image_profile"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/image_profile">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="username"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:id="@+id/username"/>
+
+        <TextView
+            android:layout_marginStart="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/comment"
+            android:text="username"
+            android:maxLines="5"
+            android:layout_marginLeft="5dp" />
+
+    </LinearLayout>
+
+        <TextView
+            android:layout_below="@+id/layoutLinear"
+            android:layout_toRightOf="@id/image_profile"
+            android:layout_marginStart="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timeTV"
+            android:textSize="12sp"
+            android:text="9 jul"
+            android:maxLines="5"
+            android:layout_marginLeft="5dp" />
+
+</RelativeLayout>

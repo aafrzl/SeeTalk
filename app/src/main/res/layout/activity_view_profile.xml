@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/padding_20_dp"
+    tools:context=".ViewProfileActivity">
+
+    <include
+        layout="@layout/bar_layout"
+        android:id="@+id/settingprofile"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_below="@+id/settingprofile"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:visibility="visible"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="8dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_height="wrap_content">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:id="@+id/view_profile_image"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/profile_img"/>
+
+            <TextView
+                android:id="@+id/name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:text="Name"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/view_profile_image"
+                android:textColor="#fff"
+                android:layout_marginLeft="10dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:background="@null"
+                android:enabled="false"
+                android:padding="@dimen/padding_10_dp"
+                android:layout_below="@id/name_tv"
+                android:textColor="@color/white"
+                android:maxLines="1"
+                android:gravity="center"
+                android:id="@+id/view_username"
+                android:textSize="18sp"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:id="@+id/bio_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:text="Bio"
+                android:layout_below="@id/view_username"
+                android:textColor="#fff"
+                android:layout_marginLeft="10dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/margin_10_dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/view_bio_et"
+                android:enabled="false"
+                android:textCursorDrawable="@null"
+                android:text=""
+                android:hint=""
+                android:maxLength="60"
+                android:minLines="4"
+                android:padding="@dimen/padding_10_dp"
+                android:maxLines="4"
+                android:gravity="top"
+                android:textColor="@color/colorPrimary"
+                android:textSize="17sp"
+                android:background="@drawable/rounded_edittext"
+                android:layout_below="@id/bio_tv"
+                android:layout_centerHorizontal="true"
+                />
+<!--            <Button-->
+<!--                android:id="@+id/addkontak"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/view_bio_et"-->
+<!--                android:text="Tambah Kontak"-->
+<!--                android:textSize="15sp"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:layout_centerHorizontal="true"/>-->
+<!--            <Button-->
+<!--                android:id="@+id/cancelMessage"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/addkontak"-->
+<!--                android:text="Batalkan Permintaan"-->
+<!--                android:visibility="invisible"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:layout_centerHorizontal="true"/>-->
+
+
+        </RelativeLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

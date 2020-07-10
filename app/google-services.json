@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "754510016317",
+    "firebase_url": "https://maribercakap-a1f82.firebaseio.com",
+    "project_id": "maribercakap-a1f82",
+    "storage_bucket": "maribercakap-a1f82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754510016317:android:a19bd6d5711766f0841f54",
+        "android_client_info": {
+          "package_name": "com.akb.seetalk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "754510016317-fqd2c516mugec7ccaamra1847gklpd4n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.akb.seetalk",
+            "certificate_hash": "5390c5f8819cd8e6c65c5c7aa236778aa3e4adc7"
+          }
+        },
+        {
+          "client_id": "754510016317-31et0plhqvgu07076qg96q1qo06p0egd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC83WdXD11idIKnxb2B3CA8wUuZ1hTRWuE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "754510016317-31et0plhqvgu07076qg96q1qo06p0egd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

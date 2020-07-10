@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SendCommentActivity">
+    
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/toolbar"
+        android:background="?android:attr/windowBackground"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recycler_view"
+        android:layout_above="@id/bottom"
+        android:layout_below="@id/toolbar"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottom"
+            android:padding="4dp"
+            android:layout_alignParentBottom="true">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/image_profile"
+                android:src="@drawable/profile_img"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/image_profile"
+                android:textSize="15sp"
+                android:hint="Mari Berkomentar..."
+                android:id="@+id/add_comment"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_10_dp"
+                android:layout_marginEnd="@dimen/margin_10_dp"
+                android:background="@android:color/transparent"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/post"
+                android:text="Posting"
+                android:layout_marginEnd="5dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:textColor="#3F51B5"
+                android:layout_marginRight="5dp"
+                android:layout_alignParentRight="true" />
+
+
+        </RelativeLayout>
+
+</RelativeLayout>

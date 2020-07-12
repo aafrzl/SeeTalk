@@ -227,7 +227,13 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
+        final DatabaseReference chatRefReceiver = FirebaseDatabase.getInstance().getReference("Chatlist")
+                .child(userid)
+                .child(firebaseUser.getUid());
+        chatRefReceiver.child("id").setValue(firebaseUser.getUid());
+
         final String msg = message;
+
 
         dbReference = FirebaseDatabase.getInstance().getReference("User").child(firebaseUser.getUid());
         dbReference.addValueEventListener(new ValueEventListener() {

@@ -10,16 +10,15 @@ Coming soon :
 - send photos & dokumen
 - Update UI UX
 - Feed Like Instagram + Stories
-- Splash Screen
 
 Work it :
-- Hapus StartActivity ganti menjadi Splash screen
-- Request Kontak untuk ke chatlist atau follow ke chatlist
 - fungsi like, comment & save post
 - Post details
 - Notification post
 - Loading Post
 - Display Post ke profile (kalo bisa)
+- Ketika user follow langsung ke chatlist (Udah bisa)
+- Profile nampil follower dan following
 
 update baru :
 

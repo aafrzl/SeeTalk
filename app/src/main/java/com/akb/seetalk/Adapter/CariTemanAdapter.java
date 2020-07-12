@@ -115,11 +115,31 @@ public class CariTemanAdapter extends RecyclerView.Adapter<CariTemanAdapter.View
                             .child("Following").child(user.getId()).setValue(true);
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getId())
                             .child("Following").child(firebaseUser.getUid()).setValue(true);
+
+                    DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist")
+                            .child(firebaseUser.getUid())
+                            .child(user.getId());
+                    chatRef.child("id").setValue(user.getId());
+
+                    DatabaseReference chatRefReceiver = FirebaseDatabase.getInstance().getReference("Chatlist")
+                            .child(user.getId())
+                            .child(firebaseUser.getUid());
+                    chatRefReceiver.child("id").setValue(firebaseUser.getUid());
                 }else{
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
                             .child("Following").child(user.getId()).removeValue();
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getId())
                             .child("Following").child(firebaseUser.getUid()).removeValue();
+
+                    DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist")
+                            .child(firebaseUser.getUid())
+                            .child(user.getId());
+                    chatRef.child("id").removeValue();
+
+                    DatabaseReference chatRefReceiver = FirebaseDatabase.getInstance().getReference("Chatlist")
+                            .child(user.getId())
+                            .child(firebaseUser.getUid());
+                    chatRefReceiver.child("id").removeValue();
                 }
             }
         });
@@ -160,9 +180,12 @@ public class CariTemanAdapter extends RecyclerView.Adapter<CariTemanAdapter.View
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.child(userid).exists()){
                     button.setText("Following");
-                }else {
+                }
+
+                else {
                     button.setText("Follow");
                 }
+
             }
 
             @Override

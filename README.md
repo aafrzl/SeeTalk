@@ -10,15 +10,15 @@ Coming soon :
 - send photos & dokumen
 - Update UI UX
 - Feed Like Instagram + Stories
-- Splash Screen
 
 Work it :
-- Ketika follow user ke chatlist
-- save post
+- fungsi save post
 - Post details
 - Notification post
 - Loading Post
 - Display Post ke profile (kalo bisa)
+- Profile nampil follower dan following
+- ganti tampilan menu jadi menu bottom navigation
 
 update baru :
 
@@ -43,4 +43,8 @@ update baru :
 - Delete message
 - Post Feed dah muncul
 - Main Menu profile image set onclick
-- Komen dah bisa
+
+*12 Juli 2020*
+- Melihat post sendiri diberanda
+- Ketika follow teman akan menambah ke chatlist
+- fix Minor bug & fix crash

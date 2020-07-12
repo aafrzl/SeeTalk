@@ -12,13 +12,13 @@ Coming soon :
 - Feed Like Instagram + Stories
 
 Work it :
-- fungsi like, comment & save post
+- fungsi save post
 - Post details
 - Notification post
 - Loading Post
 - Display Post ke profile (kalo bisa)
-- Ketika user follow langsung ke chatlist (Udah bisa)
 - Profile nampil follower dan following
+- ganti tampilan menu jadi menu bottom navigation
 
 update baru :
 
@@ -44,3 +44,7 @@ update baru :
 - Post Feed dah muncul
 - Main Menu profile image set onclick
 
+*12 Juli 2020*
+- Melihat post sendiri diberanda
+- Ketika follow teman akan menambah ke chatlist
+- fix Minor bug & fix crash

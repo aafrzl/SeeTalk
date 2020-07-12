@@ -1,5 +1,5 @@
-# MariBercakap
-Aplikasi Bercakap
+# SeeTalk
+Aplikasi SeeTalk
 
 Minor Bug:
 - Notifikasi belum ada getaran (opsional)

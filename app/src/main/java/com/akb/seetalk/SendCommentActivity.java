@@ -114,7 +114,11 @@ public class SendCommentActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                Glide.with(getApplicationContext()).load(user.getImageURL()).into(image_profile);
+                if(user.getImageURL().equals("default")){
+                    image_profile.setImageResource(R.drawable.profile_img);
+                } else {
+                    Glide.with(getApplicationContext()).load(user.getImageURL()).into(image_profile);
+                }
             }
 
             @Override

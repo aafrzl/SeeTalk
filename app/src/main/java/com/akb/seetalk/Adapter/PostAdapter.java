@@ -34,7 +34,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         this.mContext = mContext;
         this.mPost = mPost;
     }
-
     public List<Post> mPost;
 
     private FirebaseUser firebaseUser;
@@ -193,7 +192,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                Glide.with(mContext).load(user.getImageURL()).into(image_profile);
+
+                if(user.getImageURL().equals("default")){
+                    image_profile.setImageResource(R.drawable.profile_img);
+                } else {
+                    Glide.with(mContext.getApplicationContext()).load(user.getImageURL()).into(image_profile);
+                }
+
                 username.setText(user.getUsername());
                 publisher.setText(user.getUsername());
             }

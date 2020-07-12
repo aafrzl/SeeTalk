@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.akb.seetalk.Adapter.PostAdapter;
 import com.akb.seetalk.Model.Post;
+import com.akb.seetalk.Model.User;
 import com.akb.seetalk.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -113,6 +114,11 @@ public class StatusFragment extends Fragment {
                         if(post.getPublisher().equals(id)){
                             postList.add(post);
                         }
+
+                    }
+
+                    if(post.getPublisher().equals(userid)){
+                        postList.add(post);
                     }
                 }
 

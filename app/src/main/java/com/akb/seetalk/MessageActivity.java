@@ -111,6 +111,13 @@ public class MessageActivity extends AppCompatActivity {
                     Toast.makeText(MessageActivity.this, "Kamu tidak bisa mengirim pesan kosong!", Toast.LENGTH_SHORT).show();
                 }
                 sendText.setText("");
+
+                recyclerView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() -1);
+                    }
+                }, 1000);
             }
         });
 

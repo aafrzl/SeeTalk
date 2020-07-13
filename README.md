@@ -48,3 +48,9 @@ update baru :
 - Melihat post sendiri diberanda
 - Ketika follow teman akan menambah ke chatlist
 - fix Minor bug & fix crash
+*12 Juli 2020*
+- Melihat post sendiri diberanda
+- Ketika follow teman akan menambah ke chatlist
+- fix Minor bug & fix crash
+- Update tampilan buble chat
+- update smoothscroll chat

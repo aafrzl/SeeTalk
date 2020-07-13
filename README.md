@@ -16,9 +16,10 @@ Work it :
 - Post details
 - Notification post
 - Loading Post
-- Display Post ke profile (kalo bisa)
+- Display Post sendiri ke profile
 - Profile nampil follower dan following
 - ganti tampilan menu jadi menu bottom navigation
+- tambah timestamp di Post
 
 update baru :
 

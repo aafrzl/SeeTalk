@@ -54,3 +54,4 @@ update baru :
 - fix Minor bug & fix crash
 - Update tampilan buble chat
 - update smoothscroll chat
+- Tambah autolink web dichat

@@ -16,8 +16,6 @@ Work it :
 - Post details
 - Notification post
 - Loading Post
-- Display Post sendiri ke profile
-- Profile nampil follower dan following
 - ganti tampilan menu jadi menu bottom navigation
 - tambah timestamp di Post
 
@@ -56,3 +54,10 @@ update baru :
 - Update tampilan buble chat
 - update smoothscroll chat
 - Tambah autolink web dichat
+
+*14 Juli 2020*
+- Display Post di Profile dan viewProfile
+- Tambah Follow,Post,Following di viewProfile
+- Bio autolink web
+
+

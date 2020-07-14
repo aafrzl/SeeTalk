@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.akb.seetalk.Fragments.ChatsFragment;
 import com.akb.seetalk.Fragments.GrupFragment;
+import com.akb.seetalk.Fragments.ProfileFragment;
 import com.akb.seetalk.Fragments.StatusFragment;
 import com.akb.seetalk.Model.Chat;
 import com.akb.seetalk.Model.User;
@@ -117,11 +118,13 @@ public class MainActivity extends AppCompatActivity {
 
                 viewPagerAdapter.addFragment(new StatusFragment(), "Beranda");
                 viewPagerAdapter.addFragment(new GrupFragment(), "Grup Chat");
+                viewPagerAdapter.addFragment(new ProfileFragment(), "");
 
 
                 viewPager.setAdapter(viewPagerAdapter);
 
                 tabLayout.setupWithViewPager(viewPager);
+                tabLayout.getTabAt(3).setIcon(R.drawable.ic_user);
             }
 
             @Override

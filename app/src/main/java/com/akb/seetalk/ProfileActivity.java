@@ -179,20 +179,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-
-//    private void openImage() {
-//        Intent intent = new Intent();
-//        intent.setType("image/*");
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        startActivityForResult(intent, IMAGE_REQUEST);
-//    }
-
-//    private String getFileExtension(Uri uri) {
-//        ContentResolver contentResolver = this.getContentResolver();
-//        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-//        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(imageUri));
-//    }
-
     private void uploadImage() {
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("Uploading...");

@@ -2,115 +2,189 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/padding_20_dp"
+    android:layout_height="match_parent"
     tools:context=".ViewProfileActivity">
 
     <include
         layout="@layout/bar_layout"
         android:id="@+id/settingprofile"/>
 
-    <androidx.cardview.widget.CardView
-        android:layout_below="@+id/settingprofile"
-        android:layout_width="match_parent"
-        android:background="@color/colorPrimaryDark"
-        android:visibility="visible"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:padding="8dp"
-            android:background="@color/colorPrimaryDark"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/settingprofile">
 
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:id="@+id/view_profile_image"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/profile_img"/>
-
-            <TextView
-                android:id="@+id/name_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="13sp"
-                android:text="Name"
-                android:layout_marginTop="15dp"
-                android:layout_below="@id/view_profile_image"
-                android:textColor="#fff"
-                android:layout_marginLeft="10dp"/>
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Username"
-                android:background="@null"
-                android:enabled="false"
-                android:padding="@dimen/padding_10_dp"
-                android:layout_below="@id/name_tv"
-                android:textColor="@color/white"
-                android:maxLines="1"
-                android:gravity="center"
-                android:id="@+id/view_username"
-                android:textSize="18sp"
-                android:layout_marginBottom="20dp"/>
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/bio_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="13sp"
-                android:text="Bio"
-                android:layout_below="@id/view_username"
-                android:textColor="#fff"
-                android:layout_marginLeft="10dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_margin="@dimen/margin_10_dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/view_bio_et"
-                android:enabled="false"
-                android:textCursorDrawable="@null"
-                android:text=""
-                android:hint=""
-                android:maxLength="60"
-                android:minLines="4"
-                android:padding="@dimen/padding_10_dp"
-                android:maxLines="4"
-                android:gravity="top"
-                android:textColor="@color/colorPrimary"
-                android:textSize="17sp"
-                android:background="@drawable/rounded_edittext"
-                android:layout_below="@id/bio_tv"
-                android:layout_centerHorizontal="true"
-                />
-<!--            <Button-->
-<!--                android:id="@+id/addkontak"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@+id/view_bio_et"-->
-<!--                android:text="Tambah Kontak"-->
-<!--                android:textSize="15sp"-->
-<!--                android:textAllCaps="false"-->
-<!--                android:layout_centerHorizontal="true"/>-->
-<!--            <Button-->
-<!--                android:id="@+id/cancelMessage"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@+id/addkontak"-->
-<!--                android:text="Batalkan Permintaan"-->
-<!--                android:visibility="invisible"-->
-<!--                android:textAllCaps="false"-->
-<!--                android:layout_centerHorizontal="true"/>-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:id="@+id/topbar">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:id="@+id/view_profile_image"
+                        android:src="@drawable/profile_img"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="4dp"
+                        android:layout_height="80dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:text="100"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/posts"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:layout_gravity="center"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="posts"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="35dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/followers"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:layout_gravity="center"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="followers"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="35dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:text="22"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:layout_gravity="center"
+                                    android:textSize="18sp"
+                                    android:id="@+id/following"
+                                    android:textStyle="bold"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="following"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:id="@+id/FollowBtn"
+                            android:background="@drawable/button_black"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:id="@+id/mid_bar"
+                    android:layout_below="@id/topbar"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Username"
+                        android:maxLines="1"
+                        android:textStyle="bold"
+                        android:id="@+id/view_username"
+                        android:textSize="16sp"
+                        android:textColor="@color/black_shade"/>
+
+                    <TextView
+                        android:autoLink="web"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/view_bio_et"
+                        android:text="ini bio"
+                        android:maxLength="60"
+                        android:maxLines="5"
+                        android:layout_marginTop="5dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/mid_bar"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="-5dp"
+                    android:layout_marginRight="-5dp"
+                    android:id="@+id/last_bar"
+                    android:background="@drawable/button_black"
+                    android:orientation="horizontal">
 
 
-        </RelativeLayout>
+                    <ImageButton
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:id="@+id/my_fotos"
+                        android:src="@drawable/ic_grid"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_height="wrap_content" />
 
+                </LinearLayout>
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/last_bar"
+                    android:id="@+id/recycler_view"/>
 
-    </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
+        </ScrollView>
 
 </RelativeLayout>

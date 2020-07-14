@@ -114,7 +114,7 @@ public class CariTemanAdapter extends RecyclerView.Adapter<CariTemanAdapter.View
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
                             .child("Following").child(user.getId()).setValue(true);
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getId())
-                            .child("Following").child(firebaseUser.getUid()).setValue(true);
+                            .child("Followers").child(firebaseUser.getUid()).setValue(true);
 
                     DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist")
                             .child(firebaseUser.getUid())
@@ -129,7 +129,7 @@ public class CariTemanAdapter extends RecyclerView.Adapter<CariTemanAdapter.View
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
                             .child("Following").child(user.getId()).removeValue();
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getId())
-                            .child("Following").child(firebaseUser.getUid()).removeValue();
+                            .child("Followers").child(firebaseUser.getUid()).removeValue();
 
                     DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist")
                             .child(firebaseUser.getUid())

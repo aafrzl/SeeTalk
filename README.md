@@ -12,7 +12,6 @@ Coming soon :
 - Feed Like Instagram + Stories
 
 Work it :
-- fungsi save post
 - Post details
 - Notification post
 - Loading Post

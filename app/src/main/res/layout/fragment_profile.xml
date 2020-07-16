@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Fragments.ProfileFragment">
 
     <ScrollView
@@ -47,7 +48,6 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:text="100"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/posts"
@@ -72,7 +72,6 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="100"
                                 android:id="@+id/followers"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:layout_gravity="center"
@@ -93,7 +92,6 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:text="22"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/colorPrimaryDark"
@@ -168,7 +166,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:id="@+id/my_fotos"
-                    android:src="@drawable/ic_grid"
+                    android:src="@drawable/ic_gridpost"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_height="wrap_content" />
 
@@ -176,7 +174,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:id="@+id/saved_fotos"
-                    android:src="@drawable/ic_save"
+                    android:src="@drawable/ic_bookmark"
                     android:layout_height="wrap_content"
                     style="?android:attr/buttonBarButtonStyle"/>
 

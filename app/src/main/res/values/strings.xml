@@ -6,4 +6,5 @@
     <string name="Verifikasi">Kami telah mengirimkan Email Verifikasi ke email kamu mohon untuk cek dan klik link verifikasi. Jika E-mail belum muncul silahkan tekan tombol kirim ulang.</string>
     <string name="users">Users</string>
     <string name="title_request">Request</string>
+    <string name="bio_hint">Bio maksimal 60 huruf...</string>
 </resources>

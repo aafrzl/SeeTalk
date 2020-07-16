@@ -11,10 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.akb.seetalk.Fragments.ProfileFragment;
 import com.akb.seetalk.MainActivity;
 import com.akb.seetalk.Model.Comment;
 import com.akb.seetalk.Model.User;
-import com.akb.seetalk.ProfileActivity;
 import com.akb.seetalk.R;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -72,7 +72,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         holder.image_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, ProfileActivity.class);
+                Intent intent = new Intent(mContext, ProfileFragment.class);
                 intent.putExtra("publisherid", comment.getPublisher());
                 mContext.startActivity(intent);
             }

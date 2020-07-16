@@ -8,7 +8,6 @@ Coming soon :
 - Emoticon Keyboard
 - Grup chat
 - send photos & dokumen
-- Update UI UX
 
 Work it :
 - Tambah stories
@@ -16,7 +15,6 @@ Work it :
 - Loading Post
 - ganti tampilan menu jadi menu bottom navigation
 - tambah timestamp di Post
-- Edit Profile Ganti
 
 update baru :
 
@@ -63,3 +61,10 @@ update baru :
 *16 Juli 2020*
 - Post details
 - Ganti Icon Like
+
+*17 Juli 2020*
+- EditProfile
+- UI Main menu
+- Splashscreen animation
+- Login UI
+- Fix bug logout

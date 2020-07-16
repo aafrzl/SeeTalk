@@ -51,7 +51,6 @@
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:text="100"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/posts"
@@ -96,7 +95,6 @@
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:text="22"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/colorPrimaryDark"
@@ -171,7 +169,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:id="@+id/my_fotos"
-                        android:src="@drawable/ic_grid"
+                        android:src="@drawable/ic_gridpost"
                         style="?android:attr/buttonBarButtonStyle"
                         android:layout_height="wrap_content" />
 

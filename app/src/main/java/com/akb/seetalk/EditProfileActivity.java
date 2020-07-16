@@ -6,25 +6,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.akb.seetalk.Fragments.ProfileFragment;
 import com.akb.seetalk.Model.User;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,129 +36,69 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.rengwuxian.materialedittext.MaterialEditText;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
-
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import id.zelory.compressor.Compressor;
 
-public class ProfileActivity extends AppCompatActivity {
+public class EditProfileActivity extends AppCompatActivity {
 
-    CircleImageView profile_image;
-    TextView email;
-    TextInputEditText username;
-    EditText bio_et;
-    ImageView btnChange, edit_img;
-    Button save;
-    Toolbar toolbar;
+    ImageView image_profile;
+    TextView save, tv_change, email;
+    MaterialEditText username, bio;
 
-    DatabaseReference reference;
-    FirebaseUser fuser;
-    StorageReference storageReference;
-    private ProgressDialog loadingBar;
+    FirebaseUser firebaseUser;
 
-    String userid;
-
-//    private static final int IMAGE_REQUEST = 1;
-    private static final int GalleryPick = 1;
-
-
-    Uri imageUri;
+    private Uri mImageUri;
     private StorageTask<UploadTask.TaskSnapshot> uploadTask;
+    StorageReference storageRef;
 
+    private static final int GalleryPick = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_edit_profile);
 
-        toolbar = findViewById(R.id.settingprofile);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Edit Profil");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Profile");
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-            }
-        });
-
-        profile_image = findViewById(R.id.profile_image);
-        btnChange = findViewById(R.id.add_image);
-        username = findViewById(R.id.username);
-        email = findViewById(R.id.email);
-        bio_et = findViewById(R.id.bio_et);
-        loadingBar = new ProgressDialog(this);
-
-        edit_img = findViewById(R.id.edit_image);
-        save = findViewById(R.id.save_btn);
-
-        storageReference = FirebaseStorage.getInstance().getReference().child("Profile Image");
-
-        fuser = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("User").child(fuser.getUid());
-
-        edit_img.setOnClickListener(view1 -> {
-            save.setVisibility(View.VISIBLE);
-            username.setEnabled(true);
-            bio_et.setEnabled(true);
-            username.setSelection(username.getText().length());
-        });
-
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
-                username.setEnabled(false);
-                bio_et.setEnabled(false);
-
-                reference.child("bio").setValue(bio_et.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            //   Toast.makeText(getContext(),"Profile Updated...", Toast.LENGTH_SHORT);
-                        } else {
-                            //   Toast.makeText(getContext(),"Unable to Save...", Toast.LENGTH_SHORT);
-
-                        }
-                    }
-                });
-
-                reference.child("username").setValue(username.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(ProfileActivity.this, "Profile di update", Toast.LENGTH_SHORT);
-                        } else {
-                            Toast.makeText(ProfileActivity.this, "Tidak dapat menyimpan", Toast.LENGTH_SHORT);
-
-                        }
-                    }
-                });
+                finish();
             }
         });
+
+        image_profile = findViewById(R.id.image_profile);
+        save = findViewById(R.id.save);
+        tv_change = findViewById(R.id.tv_change);
+        email = findViewById(R.id.email);
+        username = findViewById(R.id.username);
+        bio = findViewById(R.id.bio_et);
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        storageRef = FirebaseStorage.getInstance().getReference().child("Profile Image");
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User").child(firebaseUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                assert user != null;
                 username.setText(user.getUsername());
                 email.setText(user.getEmail());
-                bio_et.setText(user.getBio());
-                if (this == null) {
-                    return;
-                }
-                if (user.getImageURL().equals("default")) {
-                    profile_image.setImageResource(R.drawable.profile_img);
-                } else {
-                    Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image);
+                bio.setText(user.getBio());
+                if(user.getImageURL().equals("default")){
+                    image_profile.setImageResource(R.drawable.profile_img);
+                }else{
+                    Glide.with(getApplicationContext()).load(user.getImageURL()).into(image_profile);
                 }
             }
 
@@ -168,15 +108,47 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        btnChange.setOnClickListener(new View.OnClickListener() {
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateProfile(username.getText().toString(),
+                        bio.getText().toString());
+                finish();
+            }
+        });
+
+        tv_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent galleryIntent = new Intent();
                 galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
                 galleryIntent.setType("image/*");
                 startActivityForResult(galleryIntent, GalleryPick);
+
             }
         });
+
+        image_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent galleryIntent = new Intent();
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent, GalleryPick);
+            }
+        });
+
+    }
+
+    private void updateProfile(String username, String bio) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User").child(firebaseUser.getUid());
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("username", username);
+        hashMap.put("bio", bio);
+
+        reference.updateChildren(hashMap);
     }
 
     private void uploadImage() {
@@ -184,7 +156,7 @@ public class ProfileActivity extends AppCompatActivity {
         pd.setMessage("Uploading...");
         pd.show();
 
-        File actualImage = new File(imageUri.getPath());
+        File actualImage = new File(mImageUri.getPath());
         try {
             Bitmap compressedImage = new Compressor(this)
                     .setMaxWidth(640)
@@ -195,12 +167,12 @@ public class ProfileActivity extends AppCompatActivity {
             compressedImage.compress(Bitmap.CompressFormat.JPEG, 50, baos);
             byte[] final_image = baos.toByteArray();
 
-            if (imageUri != null) {
-                final StorageReference fileReference = storageReference.child(System.currentTimeMillis()
+            if (mImageUri != null) {
+                final StorageReference fileReference = storageRef.child(System.currentTimeMillis()
                         + ".jpg");
 
                 uploadTask = fileReference.putBytes(final_image);
-                uploadTask = fileReference.putFile(imageUri);
+                uploadTask = fileReference.putFile(mImageUri);
                 uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -216,25 +188,25 @@ public class ProfileActivity extends AppCompatActivity {
                             Uri downloadUri = task.getResult();
                             String mUri = downloadUri.toString();
 
-                            reference = FirebaseDatabase.getInstance().getReference("User").child(fuser.getUid());
+                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User").child(firebaseUser.getUid());
                             HashMap<String, Object> map = new HashMap<>();
                             map.put("imageURL", "" + mUri);
                             reference.updateChildren(map);
                             pd.dismiss();
                         } else {
-                            Toast.makeText(ProfileActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditProfileActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
                             pd.dismiss();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         pd.dismiss();
                     }
                 });
             } else {
-                Toast.makeText(ProfileActivity.this, "Tidak ada item yang dipilih", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditProfileActivity.this, "Tidak ada item yang dipilih", Toast.LENGTH_SHORT).show();
             }
 
         }catch (IOException e ){
@@ -243,17 +215,19 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    //CTRL-O
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode==GalleryPick  &&  resultCode==RESULT_OK  &&  data!=null)
         {
-            imageUri = data.getData();
+            mImageUri = data.getData();
 
             CropImage.activity()
-                    .setGuidelines(CropImageView.Guidelines.ON)
                     .setAspectRatio(1, 1)
+                    .setCropShape(CropImageView.CropShape.OVAL)
                     .start(this);
         }
 
@@ -261,10 +235,10 @@ public class ProfileActivity extends AppCompatActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
 
             if (resultCode == RESULT_OK) {
-                imageUri = result.getUri();
+                mImageUri = result.getUri();
 
                 if(uploadTask != null && uploadTask.isInProgress()){
-                    Toast.makeText(ProfileActivity.this,"Upload in Progres..,",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditProfileActivity.this,"Upload in Progres..,",Toast.LENGTH_SHORT).show();
                 }else{
                     uploadImage();
                 }

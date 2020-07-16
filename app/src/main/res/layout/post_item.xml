@@ -44,8 +44,8 @@
             android:padding="8dp">
 
             <ImageView
-                android:layout_width="@dimen/margin_30_dp"
-                android:layout_height="@dimen/margin_30_dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:id="@+id/like"
                 android:src="@drawable/ic_like"/>
 
@@ -56,6 +56,7 @@
                 android:src="@drawable/ic_comment"
                 android:layout_toEndOf="@+id/like"
                 android:layout_toRightOf="@+id/like" />
+
             <ImageView
                 android:layout_width="@dimen/margin_30_dp"
                 android:layout_height="@dimen/margin_30_dp"

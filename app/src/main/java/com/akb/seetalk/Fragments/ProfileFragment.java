@@ -19,9 +19,9 @@ import android.widget.TextView;
 
 import com.akb.seetalk.Adapter.MyFotoAdapter;
 import com.akb.seetalk.Adapter.MyFotoAdapterSave;
+import com.akb.seetalk.EditProfileActivity;
 import com.akb.seetalk.Model.Post;
 import com.akb.seetalk.Model.User;
-import com.akb.seetalk.ProfileActivity;
 import com.akb.seetalk.R;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -109,7 +109,7 @@ public class ProfileFragment extends Fragment {
         EditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    startActivity(new Intent(getContext(), ProfileActivity.class));
+                    startActivity(new Intent(getContext(), EditProfileActivity.class));
             }
         });
 

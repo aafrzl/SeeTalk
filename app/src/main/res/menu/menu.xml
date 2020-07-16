@@ -21,6 +21,6 @@
         android:title="Add Post"
         app:showAsAction="always"
         android:visible="false"
-        android:icon="@drawable/ic_add_post"/>
+        android:icon="@drawable/ic_add"/>
 
 </menu>

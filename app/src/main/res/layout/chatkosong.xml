@@ -29,7 +29,7 @@
             android:layout_below="@id/es_image"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_30_dp"
-            android:text="Kontak Kamu kosong!"
+            android:text="Chat Kamu kosong!"
             android:gravity="center"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/text_size_16_sp" />
@@ -43,22 +43,8 @@
             android:layout_marginTop="@dimen/margin_10_dp"
             android:gravity="center"
             android:textStyle="italic"
-            android:text="Kamu bisa menambahkannya di Cari Teman dan mulai bercakap"
-            android:textColor="@color/black_shade"
+            android:text="Kamu bisa menambahkannya di Cari Teman dengan follow teman mu"
             android:textSize="@dimen/text_size_14_sp" />
-
-        <!--<TextView
-            android:id="@+id/es_button"
-            android:layout_width="@dimen/width_100_dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_below="@id/es_descp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/margin_20_dp"
-            android:background="@drawable/es_button_bg"
-            android:padding="@dimen/padding_10_dp"
-            android:text="Add Member"
-            android:textColor="@color/white" />-->
 
     </RelativeLayout>
 

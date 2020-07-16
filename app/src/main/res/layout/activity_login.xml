@@ -7,21 +7,15 @@
     tools:context=".LoginActivity"
     android:background="@color/white">
 
-
-
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:layout_marginTop="125dp"
-            android:src="@drawable/logo"
-            />
-
-
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_marginTop="150dp"
+        android:src="@drawable/logoseetalk" />
 
     <TextView
-        android:textStyle="italic"
-        android:textColor="@color/black"
+        android:fontFamily="@font/comfortaaregular"
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

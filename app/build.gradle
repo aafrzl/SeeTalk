@@ -66,5 +66,6 @@ dependencies {
 
     // FirebaseUI for Firebase Realtime Database
     implementation 'com.firebaseui:firebase-ui-database:6.2.1'
+    implementation 'com.rengwuxian.materialedittext:library:2.1.4'
 
 }

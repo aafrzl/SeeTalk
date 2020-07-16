@@ -129,6 +129,7 @@ public class SendCommentActivity extends AppCompatActivity {
     }
 
     private void readComments(){
+        recyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         commentList = new ArrayList<>();

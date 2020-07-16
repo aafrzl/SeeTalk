@@ -41,6 +41,7 @@
         android:layout_marginLeft="-15dp"/>
 
     <LinearLayout
+        android:id="@+id/middle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -72,14 +73,19 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:background="@drawable/button_bg"
+        android:background="@drawable/button_black"
         android:id="@+id/btn_follow"
         android:textColor="@color/colorPrimaryDark"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_alignParentRight="true" />
-
-
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="?android:attr/listDivider"
+        android:layout_below="@+id/profile_image"
+        android:layout_marginTop="10dp"/>
 
 </RelativeLayout>

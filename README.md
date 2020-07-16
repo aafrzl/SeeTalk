@@ -2,22 +2,21 @@
 Aplikasi SeeTalk
 
 Minor Bug:
-- Notifikasi belum ada getaran (opsional)
+- Detail post userProfile belum ke loop
 
 Coming soon :
 - Emoticon Keyboard
 - Grup chat
 - send photos & dokumen
 - Update UI UX
-- Feed Like Instagram + Stories
 
 Work it :
-- fungsi save post
-- Post details
+- Tambah stories
 - Notification post
 - Loading Post
 - ganti tampilan menu jadi menu bottom navigation
 - tambah timestamp di Post
+- Edit Profile Ganti
 
 update baru :
 
@@ -59,5 +58,8 @@ update baru :
 - Display Post di Profile dan viewProfile
 - Tambah Follow,Post,Following di viewProfile
 - Bio autolink web
+- Ganti tampilan item cariteman & user
 
-
+*16 Juli 2020*
+- Post details
+- Ganti Icon Like

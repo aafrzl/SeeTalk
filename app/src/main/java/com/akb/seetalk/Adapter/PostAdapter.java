@@ -2,6 +2,7 @@ package com.akb.seetalk.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.akb.seetalk.Model.Post;
 import com.akb.seetalk.Model.User;
 import com.akb.seetalk.R;
 import com.akb.seetalk.SendCommentActivity;
+import com.akb.seetalk.ViewProfileActivity;
+import com.akb.seetalk.myPostDetailActivity;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,6 +37,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
     public PostAdapter(Context mContext, List<Post> mPost) {
         this.mContext = mContext;
         this.mPost = mPost;
+
     }
     public List<Post> mPost;
 
@@ -78,6 +83,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
                 }
             }
         });
+
 
         holder.comment.setOnClickListener(new View.OnClickListener() {
             @Override

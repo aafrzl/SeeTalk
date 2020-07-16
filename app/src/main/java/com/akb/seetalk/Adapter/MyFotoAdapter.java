@@ -1,6 +1,7 @@
 package com.akb.seetalk.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.akb.seetalk.Model.Post;
 import com.akb.seetalk.R;
+import com.akb.seetalk.SendCommentActivity;
+import com.akb.seetalk.myPostDetailActivity;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -27,7 +30,8 @@ public class MyFotoAdapter extends RecyclerView.Adapter<MyFotoAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fotos_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fotos_item,
+                parent, false);
         return new MyFotoAdapter.ViewHolder(view);
     }
 
@@ -38,6 +42,15 @@ public class MyFotoAdapter extends RecyclerView.Adapter<MyFotoAdapter.ViewHolder
 
         Glide.with(context).load(post.getPostimage()).into(holder.post_image);
 
+        holder.post_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, myPostDetailActivity.class);
+                intent.putExtra("postid", post.getPostid());
+                intent.putExtra("publisherid", post.getPostid());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

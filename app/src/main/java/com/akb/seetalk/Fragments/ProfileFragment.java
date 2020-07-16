@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.akb.seetalk.Adapter.MyFotoAdapter;
+import com.akb.seetalk.Adapter.MyFotoAdapterSave;
 import com.akb.seetalk.Model.Post;
 import com.akb.seetalk.Model.User;
 import com.akb.seetalk.ProfileActivity;
@@ -48,7 +49,7 @@ public class ProfileFragment extends Fragment {
     private List<String>mySaves;
 
     RecyclerView recyclerView_saves;
-    MyFotoAdapter myFotoAdapter_saves;
+    MyFotoAdapterSave myFotoAdapter_saves;
     List<Post> postList_saves;
 
     RecyclerView recyclerView;
@@ -91,7 +92,7 @@ public class ProfileFragment extends Fragment {
         LinearLayoutManager mLayoutManagers = new GridLayoutManager(getContext(), 3);
         recyclerView_saves.setLayoutManager(mLayoutManagers);
         postList_saves = new ArrayList<>();
-        myFotoAdapter_saves = new MyFotoAdapter(getContext(), postList_saves);
+        myFotoAdapter_saves = new MyFotoAdapterSave(getContext(), postList_saves);
         recyclerView_saves.setAdapter(myFotoAdapter_saves);
 
         recyclerView.setVisibility(View.VISIBLE);

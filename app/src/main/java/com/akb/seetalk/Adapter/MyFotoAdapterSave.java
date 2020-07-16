@@ -11,48 +11,47 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.akb.seetalk.Model.Post;
-import com.akb.seetalk.Model.User;
 import com.akb.seetalk.R;
 import com.akb.seetalk.userPostDetailActivity;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class ViewFotoAdapter extends RecyclerView.Adapter<ViewFotoAdapter.ViewHolder> {
-    private Context context;
-    private List<Post>mPosts;
+public class MyFotoAdapterSave extends RecyclerView.Adapter<MyFotoAdapterSave.ViewHolder> {
+    private Context mContext;
+    private List<Post> mPost;
 
-    public ViewFotoAdapter(Context context, List<Post> mPosts) {
-        this.context = context;
-        this.mPosts = mPosts;
+    public MyFotoAdapterSave(Context mContext, List<Post> mPost) {
+        this.mContext = mContext;
+        this.mPost = mPost;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewfotos_item, parent, false);
-        return new ViewFotoAdapter.ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fotos_item, parent, false);
+        return new MyFotoAdapterSave.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Post post = mPost.get(position);
 
-        Post post = mPosts.get(position);
-        Glide.with(context).load(post.getPostimage()).into(holder.post_image);
+        Glide.with(mContext).load(post.getPostimage()).into(holder.post_image);
 
         holder.post_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, userPostDetailActivity.class);
+                Intent intent = new Intent(mContext, userPostDetailActivity.class);
                 intent.putExtra("postid", post.getPostid());
-                context.startActivity(intent);
+                mContext.startActivity(intent);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mPosts.size();
+        return mPost.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -64,5 +63,4 @@ public class ViewFotoAdapter extends RecyclerView.Adapter<ViewFotoAdapter.ViewHo
             post_image = itemView.findViewById(R.id.post_image);
         }
     }
-
 }

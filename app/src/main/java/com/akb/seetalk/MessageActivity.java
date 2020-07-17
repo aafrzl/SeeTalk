@@ -62,7 +62,7 @@ public class MessageActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     Intent intent;
-    String userid, myUid;
+    String userid;
 
     ValueEventListener seenListener;
 

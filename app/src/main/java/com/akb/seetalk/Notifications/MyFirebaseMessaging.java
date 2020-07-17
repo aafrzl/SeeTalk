@@ -11,8 +11,11 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.provider.Settings;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.akb.seetalk.MessageActivity;
@@ -53,7 +56,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
 
         Map<String, String> data_notify = remoteMessage.getData();
 
-//        String sented = remoteMessage.getData().get("sented");
+//      String sented = remoteMessage.getData().get("sented");
         String user = remoteMessage.getData().get("user");
 
         SharedPreferences preferences  = getSharedPreferences("PREFS", MODE_PRIVATE);
@@ -73,6 +76,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void sendOreoNotification(RemoteMessage remoteMessage) {
 
         String user = remoteMessage.getData().get("user");
@@ -86,7 +90,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
 
         Intent intent = new Intent(this, MessageActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("userId", user);
+        bundle.putString("userid", user);
         intent.putExtras(bundle);
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -124,18 +128,26 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, j, intent, PendingIntent.FLAG_ONE_SHOT);
 
+        assert notification != null;
+        notification.getDefaultSound();
+        notification.getDefaultLightSettings();
+        notification.getDefaultVibrateSettings();
+
+        Vibrator vibrator = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(2000);
+
         Uri defaultSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        long vibrate[]={100,500,100,500};
+        assert icon != null;
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                .setWhen(System.currentTimeMillis())
                 .setSmallIcon(Integer.parseInt(icon))
                 .setContentTitle(title)
                 .setContentText(body)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setAutoCancel(true)
                 .setSound(defaultSound)
-                .setContentIntent(pendingIntent)
-                .setVibrate(vibrate)
-                .setLights(Color.YELLOW, 200, 200);
+                .setOnlyAlertOnce(true)
+                .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
 

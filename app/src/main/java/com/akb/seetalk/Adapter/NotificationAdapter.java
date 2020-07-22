@@ -1,6 +1,7 @@
 package com.akb.seetalk.Adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder>{
+import static android.content.Context.MODE_PRIVATE;
+
+public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ImageViewHolder> {
 
     private Context mContext;
     private List<Notification> mNotification;
@@ -33,21 +36,21 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         mNotification = notification;
     }
 
-
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_item, parent, false);
-        return new NotificationAdapter.ViewHolder(view);
+    public NotificationAdapter.ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.notification_item, parent, false);
+        return new NotificationAdapter.ImageViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final NotificationAdapter.ImageViewHolder holder, final int position) {
+
         final Notification notification = mNotification.get(position);
 
         holder.text.setText(notification.getText());
 
-        getUserInfo(holder.imageView, holder.username, notification.getUserid());
+        getUserInfo(holder.image_profile, holder.username, notification.getUserid());
 
         if (notification.isIspost()) {
             holder.post_image.setVisibility(View.VISIBLE);
@@ -56,80 +59,83 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             holder.post_image.setVisibility(View.GONE);
         }
 
-        /*
-         *setOnclick itemnya masih crash
-        */
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                    if(notification.isIspost()){
-//                        Intent intent = new Intent(mContext, myPostDetailActivity.class);
-//                        intent.putExtra("postid", notification.getPostid());
-//                        mContext.startActivity(intent);
-//                    }else{
-//                        Intent intent = new Intent(mContext, ViewProfileActivity.class);
-//                        intent.putExtra("userid", notification.getUserid());
-//                        mContext.startActivity(intent);
-//                    }
-//            }
-//        });
+/*        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (notification.isIspost()) {
+                    SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
+                    editor.putString("postid", notification.getPostid());
+                    editor.apply();
+
+                    ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new PostDetailFragment()).commit();
+                } else {
+                    SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", MODE_PRIVATE).edit();
+                    editor.putString("profileid", notification.getUserid());
+                    editor.apply();
+
+                    ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new ProfileFragment()).commit();
+                }
+            }
+        });*/
 
     }
-
+    //
     @Override
     public int getItemCount() {
         return mNotification.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        public ImageView imageView, post_image;
+    public class ImageViewHolder extends RecyclerView.ViewHolder {
+
+        public ImageView image_profile, post_image;
         public TextView username, text;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ImageViewHolder(View itemView) {
             super(itemView);
 
-            imageView = itemView.findViewById(R.id.image_profile);
+            image_profile = itemView.findViewById(R.id.image_profile);
             post_image = itemView.findViewById(R.id.post_image);
             username = itemView.findViewById(R.id.username);
             text = itemView.findViewById(R.id.text);
         }
     }
 
-    private void getUserInfo(ImageView imageView, TextView username, String publisherid){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User").child(publisherid);
-        reference.addValueEventListener(new ValueEventListener() {
+    private void getUserInfo(final ImageView imageView, final TextView username, String publisherid){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
+                .child("User").child(publisherid);
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
-                if(user.getImageURL().equals("default")){
-                    imageView.setImageResource(R.drawable.profile_img);
-                } else {
-                    Glide.with(mContext).load(user.getImageURL()).into(imageView);
-                }
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                Glide.with(mContext).load(user.getImageURL()).into(imageView);
                 username.setText(user.getUsername());
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
     }
 
-    private void getPostImage(ImageView imageView, String postid){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts").child(postid);
-        reference.addValueEventListener(new ValueEventListener() {
+    private void getPostImage(final ImageView post_image, String postid){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
+                .child("Posts").child(postid);
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Post post = snapshot.getValue(Post.class);
-                Glide.with(mContext).load(post.getPostimage()).into(imageView);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Post post = dataSnapshot.getValue(Post.class);
+                Glide.with(mContext).load(post.getPostimage()).into(post_image);
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
     }
-
 }

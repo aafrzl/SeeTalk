@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.akb.seetalk.Adapter.PostAdapter;
 import com.akb.seetalk.Model.Post;
@@ -29,6 +30,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.view.View.GONE;
+
 public class StatusFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -43,6 +46,7 @@ public class StatusFragment extends Fragment {
     public StatusFragment() {
     }
 
+    ProgressBar progressBar;
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         MenuItem item = menu.findItem(R.id.addpost);
@@ -70,6 +74,8 @@ public class StatusFragment extends Fragment {
         postList = new ArrayList<>();
         postAdapter = new PostAdapter(getContext(), postList);
         recyclerView.setAdapter(postAdapter);
+
+        progressBar = view.findViewById(R.id.progress_circular);
 
         followingList();
 
@@ -123,6 +129,7 @@ public class StatusFragment extends Fragment {
                 }
 
                 postAdapter.notifyDataSetChanged();
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override

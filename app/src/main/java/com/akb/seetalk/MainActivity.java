@@ -96,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
                     viewPagerAdapter.addFragment(new ChatsFragment(), +unread+" ");
                 }
 
-                viewPagerAdapter.addFragment(new StatusFragment(), "");
                 viewPagerAdapter.addFragment(new GrupFragment(), "");
+                viewPagerAdapter.addFragment(new StatusFragment(), "");
                 viewPagerAdapter.addFragment(new NotificationFragment(), "");
                 viewPagerAdapter.addFragment(new ProfileFragment(), "");
 
@@ -106,8 +106,8 @@ public class MainActivity extends AppCompatActivity {
 
                 tabLayout.setupWithViewPager(viewPager);
                 tabLayout.getTabAt(0).setIcon(R.drawable.ic_chat);
-                tabLayout.getTabAt(1).setIcon(R.drawable.ic_grid);
-                tabLayout.getTabAt(2).setIcon(R.drawable.ic_grup);
+                tabLayout.getTabAt(1).setIcon(R.drawable.ic_grup);
+                tabLayout.getTabAt(2).setIcon(R.drawable.ic_grid);
                 tabLayout.getTabAt(3).setIcon(R.drawable.ic_bell);
                 tabLayout.getTabAt(4).setIcon(R.drawable.ic_user);
             }
@@ -120,8 +120,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

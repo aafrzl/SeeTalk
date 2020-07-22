@@ -7,10 +7,8 @@ Minor Bug:
 Coming soon :
 - Grup chat
 - send photos & dokumen
-- Stories
 
 Work it :
-- Loading Post
 - tambah timestamp di Post
 - Double Tap like & animasi
 
@@ -42,6 +40,7 @@ update baru :
 - Melihat post sendiri diberanda
 - Ketika follow teman akan menambah ke chatlist
 - fix Minor bug & fix crash
+
 *12 Juli 2020*
 - Melihat post sendiri diberanda
 - Ketika follow teman akan menambah ke chatlist
@@ -67,9 +66,14 @@ update baru :
 - Login UI
 - Fix bug logout
 
-*17 Juli 2020*
+*22 Juli 2020*
 - Fix bug
 - Notifikasi post
 - onclick username & photoprofile ke viewprofile
 - like & comment jika kosong akan hilang
 - hapus komentar
+
+*23 Juli 2020*
+- Loading post
+- List Follow, Following & Likes
+- Ganti Bar Layout

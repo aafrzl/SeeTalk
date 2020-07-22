@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.akb.seetalk.Adapter.MyFotoAdapter;
 import com.akb.seetalk.EditProfileActivity;
+import com.akb.seetalk.FollowersActivity;
 import com.akb.seetalk.Model.Post;
 import com.akb.seetalk.Model.User;
 import com.akb.seetalk.R;
@@ -125,6 +126,26 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 recyclerView.setVisibility(View.GONE);
                 recyclerView_saves.setVisibility(View.VISIBLE);
+            }
+        });
+
+        followers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), FollowersActivity.class);
+                intent.putExtra("id", userid);
+                intent.putExtra("title", "Followers");
+                startActivity(intent);
+            }
+        });
+
+        following.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), FollowersActivity.class);
+                intent.putExtra("id", userid);
+                intent.putExtra("title", "Following");
+                startActivity(intent);
             }
         });
 

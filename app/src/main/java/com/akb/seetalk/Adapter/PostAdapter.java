@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.akb.seetalk.FollowersActivity;
 import com.akb.seetalk.Model.Post;
 import com.akb.seetalk.Model.User;
 import com.akb.seetalk.R;
@@ -21,6 +22,7 @@ import com.akb.seetalk.SendCommentActivity;
 import com.akb.seetalk.ViewProfileActivity;
 import com.akb.seetalk.myPostDetailActivity;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -58,7 +60,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         Post post = mPost.get(position);
 
-        Glide.with(mContext).load(post.getPostimage()).into(holder.post_image);
+        Glide.with(mContext).load(post.getPostimage()).apply(new RequestOptions().placeholder(R.drawable.ic_image_loading))
+        .into(holder.post_image);
 
         if (post.getDescription().equals("")){
             holder.description.setVisibility(View.GONE);
@@ -137,6 +140,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder>{
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ViewProfileActivity.class);
                 intent.putExtra("userid", post.getPublisher());
+                mContext.startActivity(intent);
+            }
+        });
+
+        holder.likes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, FollowersActivity.class);
+                intent.putExtra("id", post.getPostid());
+                intent.putExtra("title", "likes");
                 mContext.startActivity(intent);
             }
         });

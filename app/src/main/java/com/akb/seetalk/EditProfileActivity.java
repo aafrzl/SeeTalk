@@ -73,7 +73,9 @@ public class EditProfileActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(EditProfileActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
 
@@ -113,7 +115,7 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 updateProfile(username.getText().toString(),
                         bio.getText().toString());
-                finish();
+                Toast.makeText(EditProfileActivity.this, "Profil Berhasil Di ubah",Toast.LENGTH_SHORT);
             }
         });
 
@@ -244,5 +246,21 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

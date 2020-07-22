@@ -47,7 +47,6 @@ public class MyFotoAdapter extends RecyclerView.Adapter<MyFotoAdapter.ViewHolder
             public void onClick(View v) {
                 Intent intent = new Intent(context, myPostDetailActivity.class);
                 intent.putExtra("postid", post.getPostid());
-                intent.putExtra("publisherid", post.getPostid());
                 context.startActivity(intent);
             }
         });

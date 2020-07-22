@@ -72,7 +72,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:id="@+id/likes"
-            android:text="99 likes"
             android:textStyle="bold"
             android:layout_marginLeft="8dp"
             android:textColor="@color/colorPrimaryDark"/>
@@ -82,7 +81,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:id="@+id/publisher"
-            android:text="Username"
             android:textStyle="bold"
             android:layout_marginLeft="8dp"
             android:textColor="@color/colorPrimaryDark"/>
@@ -91,7 +89,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="deskripsi"
             android:id="@+id/description"
             android:layout_marginLeft="8dp"
             android:textColor="@color/colorPrimaryDark"/>
@@ -102,7 +99,6 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="@dimen/margin_10_dp"
             android:id="@+id/comments"
-            android:text="Liat semua 20 comment"
             android:layout_marginLeft="8dp"
             android:textColor="@color/colorAccent"/>
 

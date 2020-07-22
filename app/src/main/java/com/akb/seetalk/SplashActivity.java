@@ -27,7 +27,7 @@ public class SplashActivity extends Activity {
     FirebaseAuth auth;
     FirebaseUser user;
 
-    private static int SPLASH_SCREEN = 5000;
+    private static int SPLASH_SCREEN = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

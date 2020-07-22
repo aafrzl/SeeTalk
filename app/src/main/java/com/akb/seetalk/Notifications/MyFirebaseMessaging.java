@@ -1,24 +1,28 @@
 package com.akb.seetalk.Notifications;
 
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.akb.seetalk.MessageActivity;
+import com.akb.seetalk.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -50,6 +54,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
         reference.child(firebaseUser.getUid()).setValue(token);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
@@ -74,7 +79,6 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
             }
         }
     }
-
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void sendOreoNotification(RemoteMessage remoteMessage) {
@@ -109,10 +113,10 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
         oreoNotification.getManager().notify(i, builder.build());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void sendNotification(RemoteMessage remoteMessage) {
 
         String user = remoteMessage.getData().get("user");
-        String icon = remoteMessage.getData().get("icon");
         String title = remoteMessage.getData().get("title");
         String body = remoteMessage.getData().get("body");
 
@@ -122,40 +126,33 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
 
         Intent intent = new Intent(this, MessageActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("userId", user);
+        bundle.putString("userid", user);
         intent.putExtras(bundle);
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, j, intent, PendingIntent.FLAG_ONE_SHOT);
 
-        assert notification != null;
-        notification.getDefaultSound();
-        notification.getDefaultLightSettings();
-        notification.getDefaultVibrateSettings();
 
-        Vibrator vibrator = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(2000);
-
-        Uri defaultSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        assert icon != null;
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                .setSmallIcon(Integer.parseInt(icon))
+        long [] vibration = {200, 2000, 200};
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "seetalk")
+                .setSmallIcon(R.drawable.ic_chat)
                 .setContentTitle(title)
                 .setContentText(body)
+                .setSound(Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/raw/notification"))
+                .setVibrate(vibration)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setAutoCancel(true)
-                .setSound(defaultSound)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(body))
                 .setOnlyAlertOnce(true)
                 .setContentIntent(pendingIntent);
 
-        NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+//        NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
 
         int i=0;
         if (j>0) {
             i=j;
         }
-
-        notificationManager.notify(i, builder.build());
+        notificationManagerCompat.notify(i, builder.build());
     }
 }

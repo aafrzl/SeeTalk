@@ -2,19 +2,17 @@
 Aplikasi SeeTalk
 
 Minor Bug:
-- Detail post userProfile belum ke loop
+- Bug jika komen belum muncul di Notifikasi
 
 Coming soon :
-- Emoticon Keyboard
 - Grup chat
 - send photos & dokumen
+- Stories
 
 Work it :
-- Tambah stories
-- Notification post
 - Loading Post
-- ganti tampilan menu jadi menu bottom navigation
 - tambah timestamp di Post
+- Double Tap like & animasi
 
 update baru :
 
@@ -68,3 +66,10 @@ update baru :
 - Splashscreen animation
 - Login UI
 - Fix bug logout
+
+*17 Juli 2020*
+- Fix bug
+- Notifikasi post
+- onclick username & photoprofile ke viewprofile
+- like & comment jika kosong akan hilang
+- hapus komentar

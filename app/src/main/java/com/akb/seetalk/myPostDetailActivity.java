@@ -24,8 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class myPostDetailActivity extends AppCompatActivity {
-    String postid, userid;
-    FirebaseAuth mAuth;
+    String postid;
 
     private PostAdapter postAdapter;
     private List<Post> postList;
@@ -37,7 +36,7 @@ public class myPostDetailActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.barLayout);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Komentar");
+        getSupportActionBar().setTitle("Postingan");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,9 +47,6 @@ public class myPostDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         postid = intent.getStringExtra("postid");
-
-        mAuth = FirebaseAuth.getInstance();
-        userid = mAuth.getCurrentUser().getUid();
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -66,19 +62,14 @@ public class myPostDetailActivity extends AppCompatActivity {
 
     private void readPosts() {
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Posts").child(postid);
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 postList.clear();
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    Post post = ds.getValue(Post.class);
-                    if(post.getPublisher().equals(userid)){
-                        postList.add(post);
-                    }
-                }
-
+                Post post = dataSnapshot.getValue(Post.class);
+                postList.add(post);
                 postAdapter.notifyDataSetChanged();
             }
 
@@ -88,4 +79,6 @@ public class myPostDetailActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

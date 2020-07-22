@@ -25,7 +25,7 @@ import java.util.List;
 
 public class userPostDetailActivity extends AppCompatActivity {
 
-    String postid, userid;
+    String postid;
 
     private PostAdapter postAdapter;
     private List<Post> postList;
@@ -48,7 +48,6 @@ public class userPostDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         postid = intent.getStringExtra("postid");
-        userid = intent.getStringExtra("userid");
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -71,7 +70,6 @@ public class userPostDetailActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                postList.clear();
                    Post post = snapshot.getValue(Post.class);
-                   post.getPublisher().equals(userid);
                    postList.add(post);
                postAdapter.notifyDataSetChanged();
             }

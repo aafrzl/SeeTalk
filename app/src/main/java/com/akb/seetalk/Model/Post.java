@@ -48,3 +48,4 @@ public class Post {
         this.publisher = publisher;
     }
 }
+

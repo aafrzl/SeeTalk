@@ -30,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -123,6 +124,9 @@ public class ViewProfileActivity extends AppCompatActivity {
                             .child(firebaseUser.getUid());
                     chatRefReceiver.child("id").setValue(firebaseUser.getUid());
 
+                    //add ke fragment notifikasi
+                    addNotifications();
+
                 }else if(btn.equals("Following")){
                     //setvalue ke database follow
                     FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
@@ -145,6 +149,18 @@ public class ViewProfileActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void addNotifications(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(userid);
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("userid", firebaseUser.getUid());
+        hashMap.put("text", "Mulai mengikuti anda");
+        hashMap.put("postid", "");
+        hashMap.put("ispost", false);
+
+        reference.push().setValue(hashMap);
     }
 
     private void setfotos() {

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -270,7 +271,7 @@ public class MessageActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Token token = snapshot.getValue(Token.class);
-                    Data data = new Data(firebaseUser.getUid(), R.mipmap.ic_launcher_round, username + ": " + msg, "Pesan Baru", userid);
+                    Data data = new Data(firebaseUser.getUid(), R.drawable.ic_chat, username + ": " + msg, "Pesan Baru", userid);
 
                     Sender sender = new Sender(data, token.getToken());
 

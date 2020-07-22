@@ -13,6 +13,8 @@ import android.os.Vibrator;
 
 import androidx.annotation.RequiresApi;
 
+import com.akb.seetalk.R;
+
 public class OreoNotification extends ContextWrapper {
     private static final String CHANNEL_ID = "com.akb.seetalk";
     private static final String CHANNEL_NAME = "SeeTalk";
@@ -30,13 +32,12 @@ public class OreoNotification extends ContextWrapper {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createChannel() {
-        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME
-                , NotificationManager.IMPORTANCE_DEFAULT);
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
         Uri defaultSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         channel.enableLights(true);
         channel.setSound(defaultSound, null);
-        channel.setVibrationPattern(new long[] {2000});
+        channel.setVibrationPattern(new long[] {0});
         channel.enableVibration(true);
         channel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
 
@@ -47,21 +48,19 @@ public class OreoNotification extends ContextWrapper {
         if (notificationManager == null) {
             notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
 
-            Vibrator vibrator = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
-            vibrator.vibrate(2000);
         }
 
         return notificationManager;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public Notification.Builder getOreoNotification(String title, String body, PendingIntent pendingIntent, Uri uri, String icon) {
+    public Notification.Builder getOreoNotification(String title, String body, PendingIntent pendingIntent, Uri defaultSound, String icon) {
         return new Notification.Builder(getApplicationContext(), CHANNEL_ID)
                 .setContentIntent(pendingIntent)
                 .setContentTitle(title)
                 .setContentText(body)
-                .setSmallIcon(Integer.parseInt(icon))
-                .setSound(uri)
+                .setSmallIcon(R.drawable.ic_chat)
+                .setSound(defaultSound)
                 .setAutoCancel(true);
 
     }

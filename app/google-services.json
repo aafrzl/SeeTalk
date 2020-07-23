@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "898937507691-1i2c6jnm29bg4ubij21vrfnocqpssdrk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.akb.seetalk",
+            "certificate_hash": "542375167f5f0d521fa8b308414f566da33ec735"
+          }
+        },
+        {
+          "client_id": "898937507691-pmj57ue8gqe2li3h67k3qc2130vnph6g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.akb.seetalk",
+            "certificate_hash": "403552bd920f0c53171efd068621afdfd215238b"
+          }
+        },
+        {
           "client_id": "898937507691-4n514dalenvtmkd1v1k50sda9qn7euch.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

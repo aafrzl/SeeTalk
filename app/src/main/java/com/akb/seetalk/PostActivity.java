@@ -79,11 +79,6 @@ public class PostActivity extends AppCompatActivity {
 
     }
 
-//    private String getFileExtension(Uri uri){
-//        ContentResolver contentResolver = getContentResolver();
-//        MimeTypeMap mime = MimeTypeMap.getSingleton();
-//        return  mime.getExtensionFromMimeType(contentResolver.getType(uri));
-//    }
 
     private void uploadimage(){
         ProgressDialog progressDialog = new ProgressDialog(this);
@@ -159,6 +154,7 @@ public class PostActivity extends AppCompatActivity {
     }
 
     //CTRL - O
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

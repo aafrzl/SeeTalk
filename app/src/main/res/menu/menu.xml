@@ -8,14 +8,20 @@
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/settingprofile"
-        android:title="Setting Profile"
+        android:id="@+id/action_create_group"
+        android:title="Buat Grup"
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/logout"
-        android:title="Logout"
+        android:id="@+id/settingprofile"
+        android:title="Edit Profile"
         app:showAsAction="never"/>
+
+    <item
+    android:id="@+id/logout"
+    android:title="Logout"
+    app:showAsAction="never"/>
+
 
     <item android:id="@+id/addpost"
         android:title="Add Post"

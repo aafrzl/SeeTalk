@@ -113,9 +113,10 @@ public class EditProfileActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateProfile(username.getText().toString(),
-                        bio.getText().toString());
-                Toast.makeText(EditProfileActivity.this, "Profil Berhasil Di ubah",Toast.LENGTH_SHORT);
+                updateProfile(username.getText().toString(), bio.getText().toString());
+                Intent intent = new Intent(EditProfileActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
 
@@ -196,7 +197,6 @@ public class EditProfileActivity extends AppCompatActivity {
                             reference.updateChildren(map);
                             pd.dismiss();
                         } else {
-                            Toast.makeText(EditProfileActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
                             pd.dismiss();
                         }
                     }

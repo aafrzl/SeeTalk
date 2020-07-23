@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="3dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/groupIconIv"
+            android:src="@drawable/profile_img"/>
+        
+        <TextView
+            android:text="Group Tittle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/groupTitleTv"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_toEndOf="@+id/groupIconIv"
+            android:layout_toRightOf="@+id/groupIconIv" />
+        <TextView
+            android:id="@+id/usernameTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/groupIconIv"
+            android:layout_below="@+id/groupTitleTv"
+            android:layout_toRightOf="@id/groupIconIv"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:textStyle="bold"
+            android:text="username"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/messageTv"
+            android:layout_below="@+id/groupTitleTv"
+            android:layout_toEndOf="@+id/usernameTv"
+            android:text="Message"
+            android:singleLine="true"
+            android:textSize="13sp"
+            android:layout_toRightOf="@+id/usernameTv"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timeTv"
+            android:layout_below="@+id/usernameTv"
+            android:layout_alignParentEnd="true"
+            android:text="Message"
+            android:singleLine="true"
+            android:textSize="13sp"
+            android:layout_alignParentRight="true" />
+
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

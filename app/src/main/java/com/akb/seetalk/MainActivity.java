@@ -155,6 +155,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(postadd);
                 return true;
 
+            case R.id.action_create_group:
+                Intent creategroup = new Intent(MainActivity.this, CreateGroupActivity.class);
+                creategroup.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(creategroup);
+                return true;
+
         }
         return false;
     }

@@ -12,8 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.akb.seetalk.Model.Post;
 import com.akb.seetalk.R;
-import com.akb.seetalk.SendCommentActivity;
-import com.akb.seetalk.myPostDetailActivity;
+import com.akb.seetalk.Activity.myPostDetailActivity;
 import com.bumptech.glide.Glide;
 
 import java.util.List;

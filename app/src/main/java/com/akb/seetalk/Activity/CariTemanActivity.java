@@ -1,4 +1,4 @@
-package com.akb.seetalk;
+package com.akb.seetalk.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,7 @@ import android.widget.EditText;
 import com.akb.seetalk.Adapter.CariTemanAdapter;
 import com.akb.seetalk.Adapter.OnItemClick;
 import com.akb.seetalk.Model.User;
+import com.akb.seetalk.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

@@ -22,6 +22,11 @@
     android:title="Logout"
     app:showAsAction="never"/>
 
+    <item android:id="@+id/addMember"
+        android:title="Add Member"
+        app:showAsAction="ifRoom"
+        android:visible="false"
+        android:icon="@drawable/ic_addmember"/>
 
     <item android:id="@+id/addpost"
         android:title="Add Post"

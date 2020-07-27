@@ -1,4 +1,4 @@
-package com.akb.seetalk;
+package com.akb.seetalk.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -17,8 +19,10 @@ import android.widget.Toast;
 import com.akb.seetalk.Adapter.GroupChatAdapter;
 import com.akb.seetalk.Model.Group;
 import com.akb.seetalk.Model.GroupChat;
-import com.akb.seetalk.Notifications.Data;
+import com.akb.seetalk.R;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -35,7 +39,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class GroupChatActivity extends AppCompatActivity {
 
-    private String groupId;
+    private String groupId, myGroupRole="";
 
     private FirebaseAuth firebaseAuth;
 
@@ -80,6 +84,7 @@ public class GroupChatActivity extends AppCompatActivity {
 
         loadGroupInfo();
         loadGroupMessage();
+        loadGroupRole();
 
         btnsend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,18 +97,38 @@ public class GroupChatActivity extends AppCompatActivity {
                     //kirim pesan
                     sendMessage(message,timestamp);
                 }
-                sendText.setText("");
             }
 
         });
 
     }
 
+    private void loadGroupRole() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Groups");
+        reference.child(groupId).child("Participans")
+                .orderByChild("uid").equalTo(firebaseAuth.getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot ds : snapshot.getChildren()){
+                            myGroupRole = ""+ds.child("role").getValue();
+                            //refresh menu item
+                            invalidateOptionsMenu();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
     private void loadGroupMessage() {
         mGroupChat = new ArrayList<>();
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("ChatGroup");
-        reference.addValueEventListener(new ValueEventListener() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Groups");
+        reference.child(groupId).child("Messages").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mGroupChat.clear();
@@ -123,14 +148,25 @@ public class GroupChatActivity extends AppCompatActivity {
     }
 
     private void sendMessage(String message, String timestamp) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Groups");
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("sender", firebaseAuth.getUid());
         hashMap.put("message", message);
         hashMap.put("timestamp", timestamp);
 
-        reference.child("ChatGroup").push().setValue(hashMap);
+        reference.child(groupId).child("Messages").child(timestamp).setValue(hashMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        sendText.setText("");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(GroupChatActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -159,5 +195,33 @@ public class GroupChatActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return super.onSupportNavigateUp();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+
+        if(myGroupRole.equals("creator") || myGroupRole.equals("admin")){
+            //im admin/creator, show add person option
+            menu.findItem(R.id.addMember).setVisible(true);
+        }
+        else {
+            menu.findItem(R.id.addMember).setVisible(false);
+        }
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.addMember){
+            Intent intent = new Intent(this, GroupParticipantAddActivity.class);
+            intent.putExtra("groupId", groupId);
+            startActivity(intent);
+
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

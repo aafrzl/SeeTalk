@@ -13,28 +13,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GroupChatActivity"></activity>
-        <activity android:name=".EditProfileActivity" />
-        <activity android:name=".CreateGroupActivity" />
-        <activity android:name=".userPostDetailActivity" />
-        <activity android:name=".myPostDetailActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".Activity.FollowersActivity"/>
+        <activity android:name=".Activity.GroupParticipantAddActivity"/>
+        <activity android:name=".Activity.GroupChatActivity" />
+        <activity android:name=".Activity.EditProfileActivity" />
+        <activity android:name=".Activity.CreateGroupActivity" />
+        <activity android:name=".Activity.userPostDetailActivity" />
+        <activity android:name=".Activity.myPostDetailActivity" />
+        <activity android:name=".Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SendCommentActivity" />
-        <activity android:name=".PostActivity" />
-        <activity android:name=".ViewProfileActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MessageActivity" />
+        <activity android:name=".Activity.SendCommentActivity" />
+        <activity android:name=".Activity.PostActivity" />
+        <activity android:name=".Activity.ViewProfileActivity" />
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.MessageActivity" />
         <activity
-            android:name=".CariTemanActivity"
-            android:parentActivityName=".MainActivity"
+            android:name=".Activity.CariTemanActivity"
+            android:parentActivityName=".Activity.MainActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Activity.MainActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />

@@ -2,21 +2,28 @@ package com.akb.seetalk.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.akb.seetalk.GroupChatActivity;
+import com.akb.seetalk.Activity.GroupChatActivity;
 import com.akb.seetalk.Model.Group;
 import com.akb.seetalk.R;
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -45,13 +52,20 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.HolderGroupC
         String groupIcon = group.getGroupIcon();
         String groupTitle = group.getGroupTitle();
 
+        holder.usernameTv.setText("");
+        holder.timeTv.setText("");
+        holder.messageTv.setText("");
+
+        //load pesan terakhir dan waktunya
+        loadLastMessage(group, holder);
+
         holder.groupTitleTv.setText(groupTitle);
 
-            if(group.equals("default")){
-                holder.groupIconIv.setImageResource(R.drawable.profile_img);
-            }else {
-                Glide.with(context.getApplicationContext()).load(group.getGroupIcon()).into(holder.groupIconIv);
-            }
+        try {
+            Glide.with(context).load(groupIcon).into(holder.groupIconIv);
+        }catch (Exception e){
+            holder.groupIconIv.setImageResource(R.drawable.profile_img);
+        }
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -62,6 +76,53 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.HolderGroupC
                 }
             });
 
+    }
+
+    private void loadLastMessage(Group group, HolderGroupChatList holder) {
+        //get last message from group
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Groups");
+        reference.child(group.getGroupId()).child("Messages").limitToLast(1) //get from last item
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot ds: snapshot.getChildren()){
+                            String message = ""+ds.child("message").getValue();
+                            String timestamp = ""+ds.child("timestamp").getValue();
+                            String sender = ""+ds.child("sender").getValue();
+
+                            //convert time
+                            Calendar cal = Calendar.getInstance(Locale.getDefault());
+                            cal.setTimeInMillis(Long.parseLong(timestamp));
+                            String dateTime = DateFormat.format("dd/MM/yyyy hh:mm a",cal).toString();
+
+                            holder.messageTv.setText(message);
+                            holder.timeTv.setText(dateTime);
+
+                            //get info from sender
+                            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
+                            ref.orderByChild("id").equalTo(sender)
+                                    .addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            for (DataSnapshot ds : snapshot.getChildren()){
+                                                String username = ""+ds.child("username").getValue();
+                                                holder.usernameTv.setText(username);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     @Override

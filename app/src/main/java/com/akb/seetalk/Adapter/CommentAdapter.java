@@ -14,12 +14,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.akb.seetalk.Fragments.ProfileFragment;
-import com.akb.seetalk.MainActivity;
+import com.akb.seetalk.Activity.MainActivity;
 import com.akb.seetalk.Model.Comment;
 import com.akb.seetalk.Model.User;
 import com.akb.seetalk.R;
-import com.akb.seetalk.ViewProfileActivity;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

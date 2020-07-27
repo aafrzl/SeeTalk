@@ -1,4 +1,4 @@
-package com.akb.seetalk;
+package com.akb.seetalk.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +19,7 @@ import com.akb.seetalk.Adapter.ViewFotoAdapter;
 import com.akb.seetalk.Model.Post;
 import com.akb.seetalk.Model.User;
 import com.akb.seetalk.Notifications.Data;
+import com.akb.seetalk.R;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

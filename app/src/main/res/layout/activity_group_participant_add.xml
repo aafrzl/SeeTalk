@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.FollowersActivity">
+    tools:context=".Activity.GroupParticipantAddActivity"
+    android:background="@color/white">
 
     <include layout="@layout/bar_layout"
         android:id="@+id/toolbar"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        android:id="@+id/recycler_view"/>
+        android:layout_height="match_parent"
+        android:id="@+id/recycler_view"
+        android:layout_below="@+id/toolbar"
+        tools:listitem="@layout/participant_add_item"/>
 
 </RelativeLayout>

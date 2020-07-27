@@ -1,4 +1,4 @@
-package com.akb.seetalk;
+package com.akb.seetalk.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -13,6 +13,7 @@ import com.akb.seetalk.Adapter.MyFotoAdapter;
 import com.akb.seetalk.Adapter.PostAdapter;
 import com.akb.seetalk.Model.Post;
 import com.akb.seetalk.Notifications.Data;
+import com.akb.seetalk.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

@@ -18,8 +18,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.akb.seetalk.Adapter.MyFotoAdapter;
-import com.akb.seetalk.EditProfileActivity;
-import com.akb.seetalk.FollowersActivity;
+import com.akb.seetalk.Activity.EditProfileActivity;
+import com.akb.seetalk.Activity.FollowersActivity;
 import com.akb.seetalk.Model.Post;
 import com.akb.seetalk.Model.User;
 import com.akb.seetalk.R;

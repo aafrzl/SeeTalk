@@ -1,4 +1,4 @@
-package com.akb.seetalk;
+package com.akb.seetalk.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -8,12 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.akb.seetalk.Adapter.CariTemanAdapter;
-import com.akb.seetalk.Adapter.OnItemClick;
-import com.akb.seetalk.Adapter.UserAdapter;
 import com.akb.seetalk.Model.User;
+import com.akb.seetalk.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.akb.seetalk.CariTemanActivity.onItemClick;
+import static com.akb.seetalk.Activity.CariTemanActivity.onItemClick;
 
 public class FollowersActivity extends AppCompatActivity {
 

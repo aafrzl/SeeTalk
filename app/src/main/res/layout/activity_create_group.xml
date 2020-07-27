@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#eee"
-    tools:context=".CreateGroupActivity">
+    tools:context=".Activity.CreateGroupActivity">
 
     <include layout="@layout/bar_layout"
         android:id="@+id/barLayout"/>

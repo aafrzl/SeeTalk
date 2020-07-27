@@ -1,19 +1,24 @@
 # SeeTalk
 Aplikasi SeeTalk
 
-Minor Bug:
-- Bug jika komen belum muncul di Notifikasi
-
 Coming soon :
-- Grup chat
 - send photos & dokumen
 
+Minor Bug:
+- jika komen belum muncul di Notifikasi
+- kalo chat baru langsung ke atas
+- Create grup pas onclick belum intent ke mainactivity
+- GetAllUser belum muncul di add member
+- batas input komen
+- hilangin menu item di GrupChatActivity
+
 Work it :
+- grup info
 - tambah timestamp di Post
+- tambah edit & delete post
 - Double Tap like & animasi
-- Recycleview reverse collection
-- Notifikasi muncul angka
-- Sound + Vibrate
+- Sound + Vibrate di lolipop
+- leave/delete grup
 
 update baru :
 
@@ -80,3 +85,10 @@ update baru :
 - Loading post
 - List Follow, Following & Likes
 - Ganti Bar Layout
+
+*27 Juli 2020*
+- Update Display Grup
+- Grup Chat
+- Add member
+- Grup Role
+- Fix Minor Bug

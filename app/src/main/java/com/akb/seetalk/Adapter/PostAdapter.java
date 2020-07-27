@@ -2,25 +2,21 @@ package com.akb.seetalk.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.akb.seetalk.FollowersActivity;
+import com.akb.seetalk.Activity.FollowersActivity;
 import com.akb.seetalk.Model.Post;
 import com.akb.seetalk.Model.User;
 import com.akb.seetalk.R;
-import com.akb.seetalk.SendCommentActivity;
-import com.akb.seetalk.ViewProfileActivity;
-import com.akb.seetalk.myPostDetailActivity;
+import com.akb.seetalk.Activity.SendCommentActivity;
+import com.akb.seetalk.Activity.ViewProfileActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;

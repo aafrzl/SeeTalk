@@ -11,11 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.akb.seetalk.MessageActivity;
+import com.akb.seetalk.Activity.MessageActivity;
 import com.akb.seetalk.Model.Chat;
 import com.akb.seetalk.Model.User;
 import com.akb.seetalk.R;
-import com.akb.seetalk.ViewProfileActivity;
+import com.akb.seetalk.Activity.ViewProfileActivity;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

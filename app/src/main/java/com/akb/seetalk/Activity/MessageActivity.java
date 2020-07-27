@@ -1,4 +1,4 @@
-package com.akb.seetalk;
+package com.akb.seetalk.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +26,7 @@ import com.akb.seetalk.Notifications.Data;
 import com.akb.seetalk.Notifications.MyResponse;
 import com.akb.seetalk.Notifications.Sender;
 import com.akb.seetalk.Notifications.Token;
+import com.akb.seetalk.R;
 import com.bumptech.glide.Glide;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;

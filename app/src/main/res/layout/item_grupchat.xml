@@ -59,7 +59,7 @@
             android:id="@+id/timeTv"
             android:layout_below="@+id/usernameTv"
             android:layout_alignParentEnd="true"
-            android:text="Message"
+            android:text="19:20"
             android:singleLine="true"
             android:textSize="13sp"
             android:layout_alignParentRight="true" />

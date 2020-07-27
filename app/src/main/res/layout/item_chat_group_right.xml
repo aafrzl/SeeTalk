@@ -49,7 +49,6 @@
                 android:layout_gravity="bottom|end"
                 />
 
-
             <TextView
                 android:maxLines="5"
                 android:autoLink="web"
@@ -68,6 +67,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/txt_seen"
             android:textSize="12sp"
+            android:visibility="gone"
             android:text="Terlihat"
             android:layout_below="@id/frameMsg"
             android:layout_marginRight="16dp"

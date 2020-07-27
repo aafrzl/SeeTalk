@@ -11,9 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.akb.seetalk.GroupChatActivity;
 import com.akb.seetalk.Model.GroupChat;
-import com.akb.seetalk.Notifications.Data;
 import com.akb.seetalk.R;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,9 +56,7 @@ public class GroupChatAdapter extends RecyclerView.Adapter<GroupChatAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull GroupChatAdapter.ViewHolder holder, int position) {
-
         GroupChat model = mGroupChat.get(position);
-
 
         //set data
         holder.show_message.setText(model.getMessage());
@@ -73,10 +69,11 @@ public class GroupChatAdapter extends RecyclerView.Adapter<GroupChatAdapter.View
 
     }
 
+
     private void setProfileImage(GroupChat model, ViewHolder holder) {
         //get info sender from uid
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
-        reference.orderByChild("uid").equalTo(model.getSender()).addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.orderByChild("id").equalTo(model.getSender()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()){
@@ -87,6 +84,7 @@ public class GroupChatAdapter extends RecyclerView.Adapter<GroupChatAdapter.View
                     }else{
                         Glide.with(mContext).load(imageurl).into(holder.profile_image);
                     }
+
                 }
 
             }

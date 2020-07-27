@@ -1,6 +1,7 @@
 package com.akb.seetalk.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.akb.seetalk.GroupChatActivity;
 import com.akb.seetalk.Model.Group;
 import com.akb.seetalk.R;
 import com.bumptech.glide.Glide;
@@ -54,7 +56,9 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.HolderGroupC
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(context, GroupChatActivity.class);
+                    intent.putExtra("groupId", groupId);
+                    context.startActivity(intent);
                 }
             });
 

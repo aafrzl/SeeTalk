@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="6dp"
+    android:layout_height="wrap_content"
+    android:id="@+id/messageLayout"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_alignParentEnd="true"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_image"
+            android:visibility="gone"/>
+
+        <FrameLayout
+            android:id="@+id/frameMsg"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/background_right"
+            android:layout_toRightOf="@id/profile_image"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="20dp"
+            android:paddingTop="4dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="10dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="30dp"
+            android:layout_toEndOf="@id/profile_image"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" >
+
+            <TextView
+                android:id="@+id/time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey"
+                android:textSize="10sp"
+                android:text="06:38"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:layout_gravity="bottom|end"
+                />
+
+
+            <TextView
+                android:maxLines="5"
+                android:autoLink="web"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/show_message"
+                android:lineSpacingExtra="2dp"
+                android:text="Hi, How are you?"
+                android:textColor="@color/white" />
+
+        </FrameLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_seen"
+            android:textSize="12sp"
+            android:text="Terlihat"
+            android:layout_below="@id/frameMsg"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

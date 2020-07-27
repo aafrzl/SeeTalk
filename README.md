@@ -11,6 +11,9 @@ Coming soon :
 Work it :
 - tambah timestamp di Post
 - Double Tap like & animasi
+- Recycleview reverse collection
+- Notifikasi muncul angka
+- Sound + Vibrate
 
 update baru :
 

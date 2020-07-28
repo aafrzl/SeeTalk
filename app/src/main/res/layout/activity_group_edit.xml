@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eee"
+    tools:context=".Activity.CreateGroupActivity">
+
+    <include layout="@layout/bar_layout"
+        android:id="@+id/barLayout"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_centerHorizontal="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/groupIconIv"
+        android:src="@drawable/profile_img"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/barLayout"/>
+
+    <EditText
+        android:maxLength="24"
+        android:maxLines="1"
+        android:layout_margin="5dp"
+        android:id="@+id/groupTitleEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_below="@id/groupIconIv"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:hint="Judul Grup"/>
+
+    <EditText
+        android:maxLength="60"
+        android:minLines="4"
+        android:maxLines="4"
+        android:layout_margin="5dp"
+        android:id="@+id/groupDescriptionEt"
+        android:minHeight="100dp"
+        android:gravity="top"
+        android:inputType="textImeMultiLine|textCapSentences"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_below="@id/groupTitleEt"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:hint="Deskripsi Grup"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/updateGroupBtn"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_done_white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true" />
+
+
+
+</RelativeLayout>

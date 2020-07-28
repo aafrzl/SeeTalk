@@ -13,8 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.GroupInfoActivity"/>
-        <activity android:name=".Activity.GroupChatActivity"/>
+        <activity android:name=".Activity.GroupEditActivity"></activity>
+        <activity android:name=".Activity.GroupInfoActivity" />
+        <activity android:name=".Activity.GroupChatActivity" />
         <activity android:name=".Activity.FollowersActivity" />
         <activity android:name=".Activity.GroupParticipantAddActivity" />
         <activity android:name=".Activity.EditProfileActivity" />

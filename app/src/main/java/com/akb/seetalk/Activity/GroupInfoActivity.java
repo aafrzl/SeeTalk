@@ -7,11 +7,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.akb.seetalk.Adapter.ParticipantAddAdapter;
 import com.akb.seetalk.Model.Group;
@@ -19,6 +23,8 @@ import com.akb.seetalk.Model.User;
 import com.akb.seetalk.Notifications.Data;
 import com.akb.seetalk.R;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -70,11 +76,6 @@ public class GroupInfoActivity extends AppCompatActivity {
         memberList = findViewById(R.id.memberList);
 
         memberRv = findViewById(R.id.memberRv);
-//        recycler_view.setHasFixedSize(true);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-//        linearLayoutManager.setStackFromEnd(true);
-//        recycler_view.setLayoutManager(linearLayoutManager);
-
         firebaseAuth = FirebaseAuth.getInstance();
 
         loadGroupInfo();
@@ -83,13 +84,111 @@ public class GroupInfoActivity extends AppCompatActivity {
         addMemberTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GroupInfoActivity.this, GroupInfoActivity.class);
+                Intent intent = new Intent(GroupInfoActivity.this, GroupParticipantAddActivity.class);
                 intent.putExtra("groupId", groupId);
                 startActivity(intent);
             }
         });
 
+        editGroupTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GroupInfoActivity.this,GroupEditActivity.class);
+                intent.putExtra("groupId", groupId);
+                startActivity(intent);
+            }
+        });
+
+                leaveGroupTv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //kalau pengguna adalah member/admin: leave group
+                        //kalau pengguna adalah creator maka delete grup
+                        String dialogTitle = "";
+                        String dialogDescription = "";
+                        String positiveButtonTitle = "";
+                        if (myGroupRole.equals("creator")) {
+                            dialogTitle = "Hapus Grup";
+                            dialogDescription = "Apakah kamu ingin menghapus grup secara permanen?";
+                            positiveButtonTitle = "HAPUS";
+                        } else {
+                            dialogTitle = "Tinggalkan Grup";
+                            dialogDescription = "Apakah kamu ingin meninggalkan grup?";
+                            positiveButtonTitle = "TINGGALKAN";
+                        }
+                        Context context;
+                        AlertDialog.Builder builder = new AlertDialog.Builder(GroupInfoActivity.this);
+                        builder.setTitle(dialogTitle)
+                                .setMessage(dialogDescription)
+                                .setPositiveButton(positiveButtonTitle, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        if (myGroupRole.equals("creator")) {
+                                            //saya creator grup, hapus grup
+                                            deleteGroup();
+                                        } else {
+                                            //saya bukan creator, tinggalkan grup
+                                            leaveGroup();
+                                        }
+                                    }
+                                })
+                                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .show();
+                    }
+                });
+
     }
+
+    private void leaveGroup() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Groups");
+        ref.child(groupId).child("Participans").child(firebaseAuth.getUid())
+                .removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        //group left succesfully
+                        Toast.makeText(GroupInfoActivity.this, "Berhasil keluar dari grup...", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(GroupInfoActivity.this, MainActivity.class));
+                        finish();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //failed to leave group
+                        Toast.makeText(GroupInfoActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void deleteGroup() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Groups");
+        ref.child(groupId)
+                .removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        //group berhasil dihapus
+                        Toast.makeText(GroupInfoActivity.this, "Grup Berhasil Dihapus...", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(GroupInfoActivity.this, MainActivity.class));
+                        finish();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //gagal hapus grup
+                        Toast.makeText(GroupInfoActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+
 
     private void loadMyGroupRole() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Groups");
@@ -235,3 +334,5 @@ public class GroupInfoActivity extends AppCompatActivity {
     }
 
 }
+
+    

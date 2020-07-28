@@ -49,16 +49,30 @@
                 android:layout_gravity="bottom|end"
                 />
 
+<!--            <TextView-->
+<!--                android:layout_marginBottom="5dp"-->
+<!--                android:maxLines="5"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/name"-->
+<!--                android:lineSpacingExtra="2dp"-->
+<!--                android:text="Username"-->
+<!--                android:visibility="gone"-->
+<!--                android:textSize="12sp"-->
+<!--                android:textColor="@color/grey" />-->
 
             <TextView
-                android:maxLines="5"
+                android:longClickable="true"
+                android:textIsSelectable="true"
+                android:maxLines="100"
+                android:autoSizeMaxTextSize="@dimen/padding_50_dp"
                 android:autoLink="web"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/show_message"
                 android:lineSpacingExtra="2dp"
-                android:text="Hi, How are you?"
-                android:textColor="@color/white" />
+                android:text="How Are You Bro?"
+                android:textColor="@color/black" />
 
         </FrameLayout>
 

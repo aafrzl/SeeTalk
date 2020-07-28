@@ -1,6 +1,8 @@
 package com.akb.seetalk.Adapter;
 
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
@@ -39,6 +41,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     private Context mContext;
     private List<Chat> mChat;
     private String imageurl;
+
+    private ClipboardManager myClipboard;
+    private ClipData myClip;
 
     FirebaseUser fuser;
 
@@ -149,6 +154,23 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
                     }
                 });
+            }
+        });
+
+        myClipboard = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+
+        holder.show_message.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String text;
+                text = holder.show_message.getText().toString();
+
+                myClip = ClipData.newPlainText("text", text);
+                myClipboard.setPrimaryClip(myClip);
+
+                Toast.makeText(mContext, "Berhasil dicopy", Toast.LENGTH_SHORT).show();
+
+                return true;
             }
         });
 

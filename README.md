@@ -5,12 +5,8 @@ Coming soon :
 - send photos & dokumen
 
 Minor Bug:
-- jika komen belum muncul di Notifikasi
+- jika dari orang lain komentar belum muncul di Notifikasi
 - kalo chat baru langsung ke atas
-- Create grup pas onclick belum intent ke mainactivity
-- GetAllUser belum muncul di add member
-- batas input komen
-- hilangin menu item di GrupChatActivity
 
 Work it :
 - grup info
@@ -93,3 +89,10 @@ update baru :
 - Grup Role
 - Fix Minor Bug
 - Activity Folder
+
+*28 Juli 2020*
+- Minor Bug fix
+- ganti UI Grup Chat
+- ganti Buble chat
+- Support copy paste chat
+- Editext Message, Grupchat, dan comment pakai scroll

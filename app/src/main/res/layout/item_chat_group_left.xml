@@ -15,7 +15,6 @@
         app:civ_border_color="#fff"
         app:civ_border_width="3dp"/>
 
-
     <FrameLayout
         android:id="@+id/frameMsg"
         android:orientation="horizontal"
@@ -27,39 +26,54 @@
         android:layout_centerHorizontal="true"
         android:paddingLeft="20dp"
         android:paddingTop="4dp"
-        android:paddingRight="30dp"
+        android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:paddingStart="20dp"
-        android:paddingEnd="30dp"
+        android:paddingEnd="10dp"
         android:layout_toEndOf="@id/profile_image">
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/isi">
+
+<!--            <TextView-->
+<!--                android:layout_marginBottom="5dp"-->
+<!--                android:maxLines="5"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/name"-->
+<!--                android:lineSpacingExtra="2dp"-->
+<!--                android:text="Username"-->
+<!--                android:textSize="12sp"-->
+<!--                android:textColor="@color/grey" />-->
 
             <TextView
-                android:id="@+id/time_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/grey"
-                android:textSize="10sp"
-                android:text="06:38"
-                android:layout_below="@+id/show_message"
-                />
-
-
-            <TextView
-                android:maxLines="5"
+                android:longClickable="true"
+                android:textIsSelectable="true"
+                android:maxLines="100"
+                android:autoSizeMaxTextSize="@dimen/padding_50_dp"
                 android:autoLink="web"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/show_message"
                 android:lineSpacingExtra="2dp"
-                android:text="Hi, How are you?"
+                android:text="Hello bro how are you?"
                 android:textColor="@color/black" />
 
         </RelativeLayout>
 
+        <TextView
+            android:layout_gravity="bottom|end"
+            android:id="@+id/time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
+            android:textSize="10sp"
+            android:text="07:06 AM"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            />
 
     </FrameLayout>
 
@@ -75,6 +89,5 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="16dp" />
-
 
 </RelativeLayout>

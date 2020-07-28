@@ -6,7 +6,7 @@
     <solid android:color="@color/cardview_light_background"/>
 
     <size
-        android:width="334dp"
-        android:height="100dp"
+        android:width="50dp"
+        android:height="50dp"
         />
 </shape>

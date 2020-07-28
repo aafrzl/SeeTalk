@@ -18,14 +18,14 @@
         
         <TextView
             android:text="Group Tittle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/groupTitleTv"
             android:layout_marginStart="4dp"
             android:layout_marginLeft="4dp"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/grey"
             android:layout_toEndOf="@+id/groupIconIv"
             android:layout_toRightOf="@+id/groupIconIv" />
         <TextView

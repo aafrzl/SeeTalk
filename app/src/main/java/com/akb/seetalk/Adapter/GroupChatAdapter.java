@@ -1,5 +1,7 @@
 package com.akb.seetalk.Adapter;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.akb.seetalk.Model.GroupChat;
+import com.akb.seetalk.Model.User;
 import com.akb.seetalk.R;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +30,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class GroupChatAdapter extends RecyclerView.Adapter<GroupChatAdapter.ViewHolder> {
 
     public static final int MSG_TYPE_LEFT = 0;
@@ -33,6 +39,9 @@ public class GroupChatAdapter extends RecyclerView.Adapter<GroupChatAdapter.View
 
     private Context mContext;
     private List<GroupChat> mGroupChat;
+
+    private ClipboardManager myClipboard;
+    private ClipData myClip;
 
     FirebaseUser fuser;
 
@@ -65,27 +74,42 @@ public class GroupChatAdapter extends RecyclerView.Adapter<GroupChatAdapter.View
             holder.time_tv.setText(holder.convertTime(model.getTimestamp()));
         }
 
-        setProfileImage(model, holder);
+        setInfoUser(model, holder);
+
+        myClipboard = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+
+        holder.show_message.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String text;
+                text = holder.show_message.getText().toString();
+
+                myClip = ClipData.newPlainText("text", text);
+                myClipboard.setPrimaryClip(myClip);
+
+                Toast.makeText(mContext, "Berhasil dicopy", Toast.LENGTH_SHORT).show();
+
+                return true;
+            }
+        });
 
     }
 
 
-    private void setProfileImage(GroupChat model, ViewHolder holder) {
+    private void setInfoUser(GroupChat model, ViewHolder holder) {
         //get info sender from uid
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
         reference.orderByChild("id").equalTo(model.getSender()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()){
-                    String imageurl=""+ds.child("imageURL").getValue();
-
-                    if(imageurl.equals("default")){
-                        holder.profile_image.setImageResource(R.drawable.profile_img);
-                    }else{
-                        Glide.with(mContext).load(imageurl).into(holder.profile_image);
+                    for(DataSnapshot ds : snapshot.getChildren()){
+                        User user = ds.getValue(User.class);
+                        if(user.getImageURL().equals("default")){
+                            holder.profile_image.setImageResource(R.drawable.profile_img);
+                        }else{
+                            Glide.with(mContext).load(user.getImageURL()).into(holder.profile_image);
+                        }
                     }
-
-                }
 
             }
 
@@ -103,11 +127,9 @@ public class GroupChatAdapter extends RecyclerView.Adapter<GroupChatAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView show_message;
-        public ImageView profile_image;
-        public TextView txt_seen;
-        public TextView time_tv;
-        public RelativeLayout messageLayout; //untuk click listener
+        private TextView show_message, txt_seen, time_tv;
+        private CircleImageView profile_image;
+        private RelativeLayout messageLayout; //untuk click listener
 
         public ViewHolder(@NonNull View itemView) {
 
@@ -118,6 +140,7 @@ public class GroupChatAdapter extends RecyclerView.Adapter<GroupChatAdapter.View
             txt_seen = itemView.findViewById(R.id.txt_seen); // nanti
             time_tv = itemView.findViewById(R.id.time_tv);
             messageLayout = itemView.findViewById(R.id.messageLayout);
+
         }
 
         public String convertTime(String time){

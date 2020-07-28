@@ -20,10 +20,11 @@
         android:layout_above="@id/bottom"
         android:layout_below="@id/toolbar"/>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/bottom"
+            android:gravity="center"
             android:padding="4dp"
             android:layout_alignParentBottom="true">
 
@@ -34,15 +35,18 @@
                 android:src="@drawable/profile_img"/>
 
             <EditText
-                android:layout_width="match_parent"
+                android:scrollbars="vertical"
+                android:maxLines="4"
+                android:minLines="1"
+                android:fadeScrollbars="false"
+                android:layout_weight="1"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/image_profile"
                 android:textSize="15sp"
                 android:hint="Mari Berkomentar..."
                 android:id="@+id/add_comment"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/margin_10_dp"
-                android:layout_marginEnd="@dimen/margin_10_dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 android:background="@android:color/transparent"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -57,6 +61,6 @@
                 android:layout_alignParentRight="true" />
 
 
-        </RelativeLayout>
+        </LinearLayout>
 
 </RelativeLayout>

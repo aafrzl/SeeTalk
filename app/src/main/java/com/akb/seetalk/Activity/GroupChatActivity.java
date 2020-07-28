@@ -12,7 +12,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +23,7 @@ import com.akb.seetalk.R;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -45,8 +46,8 @@ public class GroupChatActivity extends AppCompatActivity {
 
     private CircleImageView groupIconIv;
     private TextView groupTitleTv;
-    private ImageButton btnsend;
-    private TextInputEditText sendText;
+    private FloatingActionButton btnsend;
+    private EditText sendText;
     private RecyclerView recyclerView;
 
     GroupChatAdapter groupChatAdapter;
@@ -56,8 +57,6 @@ public class GroupChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_chat);
-
-
 
         //get id group
         Intent intent = getIntent();
@@ -200,6 +199,11 @@ public class GroupChatActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
+
+        menu.findItem(R.id.cariTeman).setVisible(false);
+        menu.findItem(R.id.action_create_group).setVisible(false);
+        menu.findItem(R.id.settingprofile).setVisible(false);
+        menu.findItem(R.id.logout).setVisible(false);
 
         if(myGroupRole.equals("creator") || myGroupRole.equals("admin")){
             //im admin/creator, show add person option

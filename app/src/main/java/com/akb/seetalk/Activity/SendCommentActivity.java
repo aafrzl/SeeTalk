@@ -110,8 +110,8 @@ public class SendCommentActivity extends AppCompatActivity {
         hashMap.put("time", String.valueOf(Locale.getDefault()));
 
         reference.child(commentid).setValue(hashMap);
-        addNotification();
         addcomment.setText("");
+        addNotification();
     }
     private void addNotification(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(publisherid);

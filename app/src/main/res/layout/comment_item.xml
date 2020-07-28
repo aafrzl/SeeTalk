@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/comment"
-            android:text="username"
+            android:text="comment"
             android:maxLines="5"
             android:layout_marginLeft="5dp" />
 
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/timeTV"
             android:textSize="12sp"
-            android:text="9 jul"
+            android:text="9 jul 2020 11.52.04 AM"
             android:maxLines="5"
             android:layout_marginLeft="5dp" />
 

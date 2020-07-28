@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import com.akb.seetalk.Notifications.Sender;
 import com.akb.seetalk.Notifications.Token;
 import com.akb.seetalk.R;
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -55,8 +57,8 @@ public class MessageActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     DatabaseReference dbReference;
 
-    ImageButton sendBtn;
-    TextInputEditText sendText;
+    FloatingActionButton sendBtn;
+    EditText sendText;
 
     MessageAdapter messageAdapter;
     List<Chat> mChat;

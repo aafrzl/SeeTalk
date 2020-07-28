@@ -109,6 +109,7 @@ public class CreateGroupActivity extends AppCompatActivity {
         }
 
         progressDialog.show();
+        startActivity(new Intent(CreateGroupActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 
         String timestamp =""+System.currentTimeMillis();
         if(image_uri == null){
@@ -225,6 +226,16 @@ public class CreateGroupActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
+        onBackPressed();
         return super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(CreateGroupActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

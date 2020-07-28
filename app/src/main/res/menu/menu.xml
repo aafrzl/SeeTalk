@@ -28,6 +28,12 @@
         android:visible="false"
         android:icon="@drawable/ic_addmember"/>
 
+    <item android:id="@+id/groupInfo"
+        android:title="Info"
+        app:showAsAction="ifRoom"
+        android:visible="false"
+        android:icon="@drawable/ic_group_info"/>
+
     <item android:id="@+id/addpost"
         android:title="Add Post"
         app:showAsAction="always"

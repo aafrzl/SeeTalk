@@ -204,6 +204,7 @@ public class GroupChatActivity extends AppCompatActivity {
         menu.findItem(R.id.action_create_group).setVisible(false);
         menu.findItem(R.id.settingprofile).setVisible(false);
         menu.findItem(R.id.logout).setVisible(false);
+        menu.findItem(R.id.groupInfo).setVisible(true);
 
         if(myGroupRole.equals("creator") || myGroupRole.equals("admin")){
             //im admin/creator, show add person option
@@ -224,8 +225,11 @@ public class GroupChatActivity extends AppCompatActivity {
             intent.putExtra("groupId", groupId);
             startActivity(intent);
 
+        }else if(id == R.id.groupInfo){
+            Intent intent = new Intent(this, GroupInfoActivity.class);
+            intent.putExtra("groupId", groupId);
+            startActivity(intent);
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

@@ -161,6 +161,7 @@ public class CreateGroupActivity extends AppCompatActivity {
         hashMap.put("groupTitle", ""+groupTitle);
         hashMap.put("groupDescription", ""+groupDescription);
         hashMap.put("groupIcon", ""+groupIcon);
+        hashMap.put("timestamp", ""+timestamp);
         hashMap.put("createdBy", ""+firebaseAuth.getUid());
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Groups");

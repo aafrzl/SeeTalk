@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.GroupInfoActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/bar_layout"
+            android:id="@+id/toolbar"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_margin="15dp"
+                android:layout_centerInParent="true"
+                android:id="@+id/groupIconIv"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/profile_img"/>
+            
+            <TextView
+                android:id="@+id/descriptionTv"
+                android:background="#54000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="12 jun 2020"
+                android:padding="5dp" 
+                android:layout_above="@+id/createdByTv"/>
+
+            <TextView
+                android:id="@+id/createdByTv"
+                android:background="#54000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Created by"
+                android:textSize="12sp"
+                android:layout_alignParentBottom="true"
+                android:padding="5dp" />
+
+        </RelativeLayout>
+        
+        <TextView
+            android:drawableStart="@drawable/ic_baseline_edit_24"
+            android:drawableTint="@color/black"
+            android:gravity="center_vertical"
+            android:drawablePadding="@dimen/padding_10_dp"
+            android:id="@+id/editGroupTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit Grup"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:drawableLeft="@drawable/ic_baseline_edit_24" />
+
+        <TextView
+            android:drawableStart="@drawable/ic_addmember"
+            android:drawableTint="@color/black"
+            android:gravity="center_vertical"
+            android:drawablePadding="@dimen/padding_10_dp"
+            android:id="@+id/addMemberTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tambah Member"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:drawableLeft="@drawable/ic_baseline_edit_24" />
+
+        <TextView
+            android:drawableStart="@drawable/ic_leave"
+            android:drawableTint="@color/black"
+            android:gravity="center_vertical"
+            android:drawablePadding="@dimen/padding_10_dp"
+            android:id="@+id/leaveGroupTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Keluar Grup"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:drawableLeft="@drawable/ic_baseline_edit_24" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#eee"/>
+
+        <TextView
+            android:drawableStart="@drawable/ic_grup"
+            android:drawableTint="@color/black"
+            android:gravity="center_vertical"
+            android:drawablePadding="@dimen/padding_10_dp"
+            android:id="@+id/memberList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="List Member"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:drawableLeft="@drawable/ic_grup" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/memberRv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/participant_add_item"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

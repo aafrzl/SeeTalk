@@ -88,15 +88,15 @@ public class MessageActivity extends AppCompatActivity {
         apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
 
         recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-
         profileImage = findViewById(R.id.profile_image);
         username = findViewById(R.id.username);
         statususer = findViewById(R.id.statususer);
-        sendBtn = findViewById(R.id.btn_send);
+        sendBtn = findViewById(R.id.BtnSend);
         sendText = findViewById(R.id.text_send);
 
         intent = getIntent();
@@ -115,6 +115,13 @@ public class MessageActivity extends AppCompatActivity {
                     Toast.makeText(MessageActivity.this, "Kamu tidak bisa mengirim pesan kosong!", Toast.LENGTH_SHORT).show();
                 }
                 sendText.setText("");
+
+                recyclerView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() -1);
+                    }
+                }, 1000);
             }
         });
 
@@ -139,6 +146,7 @@ public class MessageActivity extends AppCompatActivity {
                 } else {
                     Glide.with(getApplicationContext()).load(user.getImageURL()).into(profileImage);
                 }
+
                 readMessage(firebaseUser.getUid(), userid, user.getImageURL());
             }
 
@@ -213,6 +221,30 @@ public class MessageActivity extends AppCompatActivity {
 
         final String msg = message;
 
+                // add user to chat fragment
+        final DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist")
+                .child(firebaseUser.getUid())
+                .child(userid);
+
+        chatRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()){
+                    chatRef.child("id").setValue(userid);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        final DatabaseReference chatRefReceiver = FirebaseDatabase.getInstance().getReference("Chatlist")
+                .child(userid)
+                .child(firebaseUser.getUid());
+        chatRefReceiver.child("id").setValue(firebaseUser.getUid());
+
 
         dbReference = FirebaseDatabase.getInstance().getReference("User").child(firebaseUser.getUid());
         dbReference.addValueEventListener(new ValueEventListener() {
@@ -282,17 +314,16 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mChat.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Chat chat = snapshot.getValue(Chat.class);
-                    assert chat != null;
-                    if (chat.getReceiver().equals(myid) && chat.getSender().equals(userid)
-                            || chat.getReceiver().equals(userid) && chat.getSender().equals(myid)) {
+                    if (chat.getReceiver().equals(myid) && chat.getSender().equals(userid) ||
+                            chat.getReceiver().equals(userid) && chat.getSender().equals(myid)){
                         mChat.add(chat);
                     }
+
                     messageAdapter = new MessageAdapter(MessageActivity.this, mChat, imageURL);
-                    recyclerView.smoothScrollToPosition(messageAdapter.getItemCount());
-                    messageAdapter.notifyDataSetChanged();
                     recyclerView.setAdapter(messageAdapter);
+                    messageAdapter.notifyDataSetChanged();
                 }
             }
 

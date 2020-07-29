@@ -132,6 +132,7 @@ public class ChatsFragment extends Fragment {
                 }
 
                 userAdapter = new UserAdapter(getContext(), mUsers, true, onItemClick);
+                userAdapter.notifyDataSetChanged();
                 recyclerView.setAdapter(userAdapter);
             }
 

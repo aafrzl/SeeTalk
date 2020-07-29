@@ -2,6 +2,7 @@ package com.akb.seetalk.Notifications;
 
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -73,6 +75,8 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
                 }
             }
         }
+
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -127,13 +131,14 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, j, intent, PendingIntent.FLAG_ONE_SHOT);
 
-
+        Uri sound= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         long [] vibration = {200, 2000, 200};
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "seetalk")
                 .setSmallIcon(R.drawable.ic_chat)
                 .setContentTitle(title)
                 .setContentText(body)
-                .setSound(Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/raw/notification"))
+                .setSound(sound)
                 .setVibrate(vibration)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)
@@ -141,13 +146,13 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
                 .setOnlyAlertOnce(true)
                 .setContentIntent(pendingIntent);
 
-//        NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+//        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(this.NOTIFICATION_SERVICE);
 
         int i=0;
         if (j>0) {
             i=j;
         }
-        notificationManagerCompat.notify(i, builder.build());
+        notificationManager.notify(i, builder.build());
     }
 }

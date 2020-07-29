@@ -8,9 +8,9 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_seetalk"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_seetalk"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.GroupEditActivity"></activity>

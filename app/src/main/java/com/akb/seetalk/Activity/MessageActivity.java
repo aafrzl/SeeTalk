@@ -88,10 +88,10 @@ public class MessageActivity extends AppCompatActivity {
         apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
 
         recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+
 
         profileImage = findViewById(R.id.profile_image);
         username = findViewById(R.id.username);
@@ -115,13 +115,6 @@ public class MessageActivity extends AppCompatActivity {
                     Toast.makeText(MessageActivity.this, "Kamu tidak bisa mengirim pesan kosong!", Toast.LENGTH_SHORT).show();
                 }
                 sendText.setText("");
-
-                recyclerView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() -1);
-                    }
-                }, 1000);
             }
         });
 
@@ -297,6 +290,8 @@ public class MessageActivity extends AppCompatActivity {
                         mChat.add(chat);
                     }
                     messageAdapter = new MessageAdapter(MessageActivity.this, mChat, imageURL);
+                    recyclerView.smoothScrollToPosition(messageAdapter.getItemCount());
+                    messageAdapter.notifyDataSetChanged();
                     recyclerView.setAdapter(messageAdapter);
                 }
             }

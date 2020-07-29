@@ -170,24 +170,31 @@ public class GroupChatActivity extends AppCompatActivity {
     }
 
     private void loadGroupInfo() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Groups").child(groupId);
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Group group = snapshot.getValue(Group.class);
-                groupTitleTv.setText(group.getGroupTitle());
-                try {
-                    Glide.with(getApplicationContext()).load(group.getGroupIcon()).into(groupIconIv);
-                }catch (Exception e){
-                    groupIconIv.setImageResource(R.drawable.profile_img);
-                }
-            }
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Groups");
+        reference.orderByChild("groupId").equalTo(groupId)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot ds : snapshot.getChildren()){
+                            String groupTitle =""+ds.child("groupTitle").getValue();
+                            String groupIcon =""+ds.child("groupIcon").getValue();
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                            groupTitleTv.setText(groupTitle);
 
-            }
-        });
+                            try{
+                                Glide.with(getApplicationContext()).load(groupIcon).into(groupIconIv);
+                            }catch (Exception e){
+                                groupIconIv.setImageResource(R.drawable.profile_img);
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     @Override

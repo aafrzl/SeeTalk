@@ -1,8 +1,10 @@
 package com.akb.seetalk.Adapter;
 
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.ViewUtils;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.akb.seetalk.Model.Group;
 import com.akb.seetalk.Model.GroupChat;
 import com.akb.seetalk.Model.User;
 import com.akb.seetalk.R;
@@ -24,11 +28,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Queue;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -49,8 +56,6 @@ public class GroupChatAdapter extends RecyclerView.Adapter<GroupChatAdapter.View
         this.mContext = mContext;
         this.mGroupChat = mGroupChat;
     }
-
-
 
     @NonNull
     @Override

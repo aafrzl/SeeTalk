@@ -2,16 +2,13 @@
 Aplikasi SeeTalk
 
 Coming soon :
-- send photos & dokumen
+- send photos & dokumen di chat & grup chat
 
 Minor Bug:
 - jika dari orang lain komentar belum muncul di Notifikasi
 - kalo chat baru langsung ke atas
 
 Work it :
-- grup info
-- tambah timestamp di Post
-- tambah edit & delete post
 - Double Tap like & animasi
 - Sound + Vibrate di lolipop
 - leave/delete grup
@@ -96,3 +93,8 @@ update baru :
 - ganti Buble chat
 - Support copy paste chat
 - Editext Message, Grupchat, dan comment pakai scroll
+
+*29 Juli 2020*
+- Grup info
+- Leave, Edit, Delete Grup
+- Post Delete Edit

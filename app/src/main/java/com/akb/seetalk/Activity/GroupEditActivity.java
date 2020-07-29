@@ -62,18 +62,17 @@ public class GroupEditActivity extends AppCompatActivity {
     private CircleImageView groupIconIv;
     private EditText groupTitleEt, groupDescriptionEt;
     private FloatingActionButton updateGroupBtn;
-    private ProgressDialog progressDialog;
+//    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_edit);
 
-        Toolbar toolbar= findViewById(R.id.toolbar);
-        getSupportActionBar().setTitle("Edit Group");
+        Toolbar toolbar = findViewById(R.id.barLayout);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Buat Grup");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         //init UI views
         groupIconIv = findViewById(R.id.groupIconIv);
@@ -84,9 +83,9 @@ public class GroupEditActivity extends AppCompatActivity {
         storageRef = FirebaseStorage.getInstance().getReference("Group Icon");
 
         groupId = getIntent().getStringExtra("groupId");
-        progressDialog = new ProgressDialog(getApplicationContext()) ;
-        progressDialog.setTitle("Please Wait...");
-        progressDialog.setCanceledOnTouchOutside(false);
+//        progressDialog = new ProgressDialog(getApplicationContext()) ;
+//        progressDialog.setTitle("Please Wait...");
+//        progressDialog.setCanceledOnTouchOutside(false);
 
         firebaseAuth = firebaseAuth.getInstance();
         loadGroupInfo();
@@ -125,8 +124,9 @@ public class GroupEditActivity extends AppCompatActivity {
 
         if (image_uri==null){
             //update grup tanpa icon
-            progressDialog.setMessage("Updating Group Info...");
-            progressDialog.show();
+//            progressDialog.setMessage("Updating Group Info...");
+//            progressDialog.show();
+
 
             HashMap<String, Object> hashMap = new HashMap<>();
             hashMap.put("groupTitle", groupTitle);
@@ -139,16 +139,19 @@ public class GroupEditActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
                             //updated
-                            progressDialog.dismiss();
+//                            progressDialog.dismiss();
                             Toast.makeText(GroupEditActivity.this, "Group info updated...", Toast.LENGTH_SHORT).show();
-
+                            Intent intent = new Intent(GroupEditActivity.this, GroupChatActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.putExtra("groupId", groupId);
+                            startActivity(intent);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             //update falide
-                            progressDialog.dismiss();
+//                            progressDialog.dismiss();
                             Toast.makeText(GroupEditActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -186,7 +189,7 @@ public class GroupEditActivity extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         //updated
-                                        progressDialog.dismiss();
+//                                        progressDialog.dismiss();
                                         Toast.makeText(GroupEditActivity.this, "Group info updated...", Toast.LENGTH_SHORT).show();
 
                                     }
@@ -195,7 +198,7 @@ public class GroupEditActivity extends AppCompatActivity {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         //update falide
-                                        progressDialog.dismiss();
+//                                        progressDialog.dismiss();
                                         Toast.makeText(GroupEditActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
@@ -207,60 +210,14 @@ public class GroupEditActivity extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    progressDialog.dismiss();
+//                    progressDialog.dismiss();
                     Toast.makeText(GroupEditActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
 
 
-        }
-
-    private void updategroup(String timestamp, String groupTitle, String groupDescription, String groupIcon) {
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("groupId", ""+timestamp);
-        hashMap.put("groupTitle", ""+groupTitle);
-        hashMap.put("groupDescription", ""+groupDescription);
-        hashMap.put("groupIcon", ""+groupIcon);
-        hashMap.put("timestamp", ""+timestamp);
-        hashMap.put("createdBy", ""+firebaseAuth.getUid());
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Groups");
-        reference.child(timestamp).setValue(hashMap)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        HashMap<String, String> hashMap1 = new HashMap<>();
-                        hashMap1.put("uid", firebaseAuth.getUid());
-                        hashMap1.put("role", "creator");
-                        hashMap1.put("timestamp", timestamp);
-
-                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Groups");
-                        reference.child(timestamp).child("Participans").child(firebaseAuth.getUid())
-                                .setValue(hashMap1)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        progressDialog.dismiss();
-                                        Toast.makeText(GroupEditActivity.this, "Group berhasil dibuat", Toast.LENGTH_SHORT).show();
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                progressDialog.dismiss();
-                                Toast.makeText(GroupEditActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
-                Toast.makeText(GroupEditActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
-
 
 
     private void loadGroupInfo() {
@@ -281,6 +238,10 @@ public class GroupEditActivity extends AppCompatActivity {
                             Calendar cal = Calendar.getInstance(Locale.getDefault());
                             cal.setTimeInMillis(Long.parseLong(timestamp));
                             String dateTime = DateFormat.format("dd/MM/yyyy hh:mm aa", cal).toString();
+
+                            //setgrupdata
+                            groupTitleEt.setText(GroupTitle);
+                            groupDescriptionEt.setText(GroupDescription);
 
 
                             try {

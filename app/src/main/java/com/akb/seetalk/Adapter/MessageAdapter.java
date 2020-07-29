@@ -124,7 +124,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             private void deleteMessage(int position) {
                 String myUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-
                 String msgTimeStamp = mChat.get(position).getTime();
                 DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Chats");
                 Query query = dbRef.orderByChild("time").equalTo(msgTimeStamp);
@@ -134,17 +133,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                         for(DataSnapshot ds : snapshot.getChildren()){
                             //delete only his message
                             if(ds.child("sender").getValue().equals(myUID)){
-                                //remove message dari chats
-//                                ds.getRef().removeValue();
 
-                                //set value of message "this message was deleted.."
+                                //set value of message "Pesan ini telah dihapus"
                                 HashMap<String, Object> hashMap = new HashMap<>();
                                 hashMap.put("message", "Pesan ini telah dihapus");
                                 ds.getRef().updateChildren(hashMap);
 
                                 Toast.makeText(mContext, "Pesan Terhapus",Toast.LENGTH_SHORT).show();
                             }else{
-                                Toast.makeText(mContext, "Kamu hanya bisa hapus pesan kamu sendiri",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mContext, "Kamu hanya bisa hapus pesan kamu sendiri",
+                                        Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -216,4 +214,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             return MSG_TYPE_LEFT;
         }
     }
+
+
 }

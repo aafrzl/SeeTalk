@@ -153,7 +153,7 @@ public class GroupInfoActivity extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         //group left succesfully
                         Toast.makeText(GroupInfoActivity.this, "Berhasil keluar dari grup...", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(GroupInfoActivity.this, MainActivity.class));
+                        startActivity(new Intent(GroupInfoActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         finish();
                     }
                 })
@@ -316,7 +316,7 @@ public class GroupInfoActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()){
                     String username =""+ds.child("username").getValue();
-                    createdByTv.setText("Dibuat pada "+username+" on "+dateTime);
+                    createdByTv.setText("Dibuat oleh "+username+" pada "+dateTime);
                 }
             }
 
